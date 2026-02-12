@@ -1,0 +1,31 @@
+# Ghostty Configuration V2
+# Simple, effective, organized
+
+# Load OS-specific settings (auto-detects based on which file exists)
+# Create a symlink: os/current.conf -> macos.conf or linux.conf
+config-file = ?os/current.conf
+
+# Core modules
+config-file = theme.conf
+config-file = appearance.conf
+config-file = keybinds.conf
+config-file = quick-terminal.conf
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = cursor,title,sudo,ssh-terminfo,path
+
+# Basic settings
+term = xterm-ghostty
+scrollback-limit = 10000000
+window-inherit-working-directory = true
+window-inherit-font-size = true
+confirm-close-surface = true
+
+# Cross-platform behavior (different defaults per OS)
+# false on macOS, true on Linux by default
+quit-after-last-window-closed = false
+undo-timeout = 8s
+
+# Quick terminal (cross-platform base settings)
+quick-terminal-screen = mouse

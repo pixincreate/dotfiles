@@ -1,0 +1,4 @@
+[gpg]
+	format = ssh
+[user]
+	signingkey = /Users/pavana.narayana/.ssh/id_ed25519_sign.pub
