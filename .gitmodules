@@ -1,0 +1,9 @@
+[submodule "home/config/.config/nvim"]
+	path = home/config/.config/nvim
+	url = https://github.com/NishantJoshi00/nvim-config.git
+[submodule "home/config/.config/wezterm"]
+	path = home/config/.config/wezterm
+	url = https://github.com/NishantJoshi00/wez-config.git
+[submodule "home/config/.config/alacritty/themes"]
+	path = home/config/.config/alacritty/themes
+	url = https://github.com/alacritty/alacritty-theme.git
