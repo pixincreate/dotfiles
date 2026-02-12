@@ -1,3 +1,4 @@
+
 # Detect the current running shell, not the default shell
 if [ -n "$ZSH_VERSION" ]; then
     CURRENT_SHELL="zsh"
@@ -114,15 +115,38 @@ else
     export STARSHIP_CONFIG="$STARSHIP_PRESETS_DIR/starship.toml"
 fi
 
+function _get_current_preset() {
+    if [ -f "$STARSHIP_STATE_FILE" ]; then
+        if read -r current_preset < "$STARSHIP_STATE_FILE" 2>/dev/null && [ -n "$current_preset" ]; then
+            echo "$current_preset"
+            return 0
+        fi
+    fi
+    return 1
+}
+
 function _list_presets() {
-    echo "Available presets:"
+    local show_current=false
+    if [ "$1" = "--show-current" ]; then
+        show_current=true
+    fi
+
+    local current_preset=""
+    if [ "$show_current" = true ]; then
+        current_preset=$(_get_current_preset) || true
+    fi
+
     if [ -d "$STARSHIP_PRESETS_DIR" ]; then
         local found_presets=false
         for preset in "$STARSHIP_PRESETS_DIR"/*.toml; do
             if [ -f "$preset" ]; then
                 preset_name="${preset##*/}"
                 preset_name="${preset_name%.toml}"
-                echo "  $preset_name"
+                if [ "$show_current" = true ] && [ "$preset_name" = "$current_preset" ]; then
+                    echo "  $preset_name *"
+                else
+                    echo "  $preset_name"
+                fi
                 found_presets=true
             fi
         done
@@ -242,14 +266,18 @@ Switch between starship presets and manage palette themes.
 
 Commands:
   spreset <preset>                    Switch to the specified preset
-  spreset <preset> --palette=<name>   Switch preset and change palette (if supported)
+  spreset <preset> --palette=<name>  Switch preset and change palette (if supported)
   spreset <preset> --list-palettes    List available palettes for the preset
-  spreset --help                      Show this help message
+  spreset --list                     List all installed presets
+  spreset --current                  Show currently enabled preset
+  spreset --help                     Show this help message
 
 Examples:
   spreset catppuccin                                # Switch to catppuccin preset
   spreset catppuccin --palette=catppuccin_mocha     # Switch and set mocha palette
   spreset catppuccin --list-palettes                # List catppuccin palettes
+  spreset --list                                    # List all presets (current marked with *)
+  spreset --current                                 # Show current preset
   spreset starship                                  # Switch to starship preset
   spreset --help                                    # Show this help
 
@@ -262,12 +290,22 @@ function switch_starship_preset() {
     local palette_name=""
     local list_palettes=false
     local show_help=false
+    local list_presets=false
+    local show_current=false
 
     # Parse arguments
     while [ $# -gt 0 ]; do
         case "$1" in
             --help|-h)
                 show_help=true
+                shift
+                ;;
+            --list)
+                list_presets=true
+                shift
+                ;;
+            --current)
+                show_current=true
                 shift
                 ;;
             --palette=*)
@@ -298,6 +336,25 @@ function switch_starship_preset() {
     # Handle help
     if [ "$show_help" = true ]; then
         _show_spreset_help
+        return 0
+    fi
+
+    # Handle list
+    if [ "$list_presets" = true ]; then
+        echo "Available presets:"
+        _list_presets --show-current
+        return 0
+    fi
+
+    # Handle current
+    if [ "$show_current" = true ]; then
+        local current
+        current=$(_get_current_preset) || true
+        if [ -n "$current" ]; then
+            echo "Current preset: $current"
+        else
+            echo "No preset currently enabled"
+        fi
         return 0
     fi
 
