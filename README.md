@@ -2,13 +2,27 @@
 
 Personal dotfiles managed with GNU Stow.
 
-## Quick Start
+## Installation
+
+### Recommended (with Omaforge)
 
 ```bash
-# Clone the repository
-git clone https://github.com/pixincreate/dotfiles.git ~/.dotfiles
+# One-line installer (recommended)
+eval "$(curl -fsSL https://raw.githubusercontent.com/pixincreate/omaforge/main/unix/setup)"
 
-# Install GNU Stow if not already installed
+# Or manually clone both repos
+git clone https://github.com/pixincreate/dotfiles.git ~/.dotfiles
+git clone https://github.com/pixincreate/omaforge.git ~/.omaforge
+
+# Then run setup
+cd ~/.omaforge/unix/macos && ./macos-setup   # macOS
+cd ~/.omaforge/unix/fedora && ./fedora-setup # Fedora
+```
+
+### Manual (Stow only)
+
+```bash
+# Install GNU Stow
 # macOS: brew install stow
 # Fedora: sudo dnf install stow
 
@@ -27,7 +41,7 @@ stow --no-folding --restow --target=$HOME home/cargo home/config home/git home/l
 │   ├── git/               # Git configuration (~/.gitconfig)
 │   ├── local/             # Local binaries (~/.local/)
 │   ├── Pictures/          # Wallpapers and screenshots
-│   ├── ssh/               # SSH configuration (~/.ssh/)
+│   ├── ssh/               # SSH keys and config
 │   └── zsh/               # ZSH configuration (~/.zsh/)
 └── fonts/                  # Font files
 ```
@@ -65,6 +79,19 @@ stow --no-folding --restow --dir=home --target=$HOME <package-name>
 
 ```bash
 stow --delete --dir=home --target=$HOME <package-name>
+```
+
+### Using Omaforge utilities
+
+```bash
+# Stow all packages
+omaforge-stow --all
+
+# Stow specific packages
+omaforge-stow config zsh
+
+# Restow
+omaforge-stow -R --all
 ```
 
 ## Fonts
