@@ -375,6 +375,9 @@ eval "$(direnv hook zsh)"
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
+# Set up atuin
+eval "$(atuin init zsh)"
+
 # Load Starship and transient prompt
 [[ -f ~/.zsh/.starship.sh ]] && source ~/.zsh/.starship.sh
 
