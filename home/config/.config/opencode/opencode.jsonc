@@ -4,16 +4,21 @@
   "tui": {
     "scroll_speed": 3,
     "scroll_acceleration": {
-      "enabled": true
+      "enabled": true,
     },
-    "diff_style": "auto"
+    "diff_style": "auto",
   },
   "mcp": {
     "deepwiki": {
       "type": "remote",
       "url": "https://mcp.deepwiki.com/mcp",
-      "enabled": true
-    }
+      "enabled": true,
+    },
+    "grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true,
+    },
   },
-  "plugin": ["@tarquinen/opencode-dcp@latest"]
+  "plugin": ["@tarquinen/opencode-dcp@latest"],
 }
