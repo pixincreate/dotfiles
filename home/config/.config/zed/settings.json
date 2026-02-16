@@ -6,10 +6,10 @@
   // - "light": Use the theme indicated by the "light" field
   // - "dark": Use the theme indicated by the "dark" field
   "edit_predictions": {
-    "provider": "zed"
+    "provider": "zed",
   },
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "theme": {
     "mode": "system",
@@ -21,7 +21,7 @@
   // The name of a font to use for rendering text in the editor
   // ".ZedMono" currently aliases to Lilex
   // but this may change in the future.
-  "buffer_font_family": "GeistMono Nerd Font",
+  "buffer_font_family": "MesloLGL Nerd Font Mono",
   // The default font size for text in the editor
   "buffer_font_size": 13,
   // The weight of the editor font in standard CSS units from 100 to 900.
@@ -30,7 +30,7 @@
   // You can set this to ".SystemUIFont" to use the system font
   // ".ZedSans" currently aliases to "IBM Plex Sans", but this may
   // change in the future
-  "ui_font_family": "GeistMono Nerd Font Propo",
+  "ui_font_family": "MesloLGM Nerd Font",
   // Active pane styling settings.
   "active_pane_modifiers": {
     // Inset border size of the active pane, in pixels.
@@ -120,12 +120,12 @@
   },
   "agent": {
     "tool_permissions": {
-      "default": "allow"
+      "default": "allow",
     },
     "default_profile": "ask",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-opus-4.5",
+      "provider": "ollama",
+      "model": "glm-5:cloud",
     },
     "model_parameters": [],
   },
@@ -226,6 +226,8 @@
     "dockerfile": true,
     "env": true,
     "git-firefly": true,
+    "glsl": true,
+    "graphql": true,
     "groovy": true,
     "html": true,
     "ini": true,
@@ -238,29 +240,20 @@
     "log": true,
     "lua": true,
     "make": true,
+    "material-icon-theme": true,
     "nix": true,
+    "nu": true,
     "proto": true,
     "rescript": true,
     "ruff": true,
     "sql": true,
     "toml": true,
+    "verilog": true,
     "xml": true,
     "zig": true,
   },
   // Different settings for specific languages.
   "languages": {
-    "Astro": {
-      "language_servers": ["astro-language-server", "..."],
-      "prettier": {
-        "allowed": true,
-        "plugins": ["prettier-plugin-astro"],
-      },
-    },
-    "Blade": {
-      "prettier": {
-        "allowed": true,
-      },
-    },
     "C": {
       "format_on_save": "off",
       "use_on_type_format": false,
@@ -280,28 +273,10 @@
         "allowed": true,
       },
     },
-    "Dart": {
-      "tab_size": 2,
-    },
     "Diff": {
       "show_edit_predictions": false,
       "remove_trailing_whitespace_on_save": false,
       "ensure_final_newline_on_save": false,
-    },
-    "Elixir": {
-      "language_servers": [
-        "elixir-ls",
-        "!expert",
-        "!next-ls",
-        "!lexical",
-        "...",
-      ],
-    },
-    "Elm": {
-      "tab_size": 4,
-    },
-    "Erlang": {
-      "language_servers": ["erlang-ls", "!elp", "..."],
     },
     "Git Commit": {
       "allow_rewrap": "anywhere",
@@ -318,15 +293,6 @@
       "prettier": {
         "allowed": true,
       },
-    },
-    "HEEX": {
-      "language_servers": [
-        "elixir-ls",
-        "!expert",
-        "!next-ls",
-        "!lexical",
-        "...",
-      ],
     },
     "HTML": {
       "prettier": {
@@ -387,55 +353,17 @@
         "allowed": true,
       },
     },
-    "PHP": {
-      "language_servers": ["phpactor", "!intelephense", "..."],
-      "prettier": {
-        "allowed": true,
-        "plugins": ["@prettier/plugin-php"],
-        "parser": "php",
-      },
-    },
     "Plain Text": {
       "allow_rewrap": "anywhere",
     },
     "Python": {
       "debuggers": ["Debugpy"],
     },
-    "Ruby": {
-      "language_servers": [
-        "solargraph",
-        "!ruby-lsp",
-        "!rubocop",
-        "!sorbet",
-        "!steep",
-        "...",
-      ],
-    },
     "Rust": {
       "debuggers": ["CodeLLDB"],
     },
-    "SCSS": {
-      "prettier": {
-        "allowed": true,
-      },
-    },
-    "Starlark": {
-      "language_servers": ["starpls", "!buck2-lsp", "..."],
-    },
-    "Svelte": {
-      "language_servers": ["svelte-language-server", "..."],
-      "prettier": {
-        "allowed": true,
-        "plugins": ["prettier-plugin-svelte"],
-      },
-    },
     "TSX": {
       "language_servers": ["!typescript-language-server", "vtsls", "..."],
-      "prettier": {
-        "allowed": true,
-      },
-    },
-    "Twig": {
       "prettier": {
         "allowed": true,
       },
@@ -449,12 +377,6 @@
     "SystemVerilog": {
       "format_on_save": "off",
       "use_on_type_format": false,
-    },
-    "Vue.js": {
-      "language_servers": ["vue-language-server", "..."],
-      "prettier": {
-        "allowed": true,
-      },
     },
     "XML": {
       "prettier": {
@@ -521,23 +443,6 @@
         },
         "trace": {
           "server": "verbose",
-        },
-      },
-    },
-    // Python Configuration
-    "pyright": {
-      "settings": {
-        "python.analysis": {
-          "autoImportCompletions": true,
-          "diagnosticMode": "workspace",
-          "useLibraryCodeForTypes": true,
-          "reportMissingImports": true,
-          "reportMissingTypeStubs": true,
-          "typeCheckingMode": "standard",
-        },
-        "python": {
-          "pythonPath": "./venv/bin/python",
-          "venvPath": "./venv",
         },
       },
     },
