@@ -3,31 +3,8 @@ command_exists() {
   command -v "$1" > /dev/null 2>&1
 }
 
-if [[ "$TERM" = "alacritty" ]]; then
-  if [[ "${MUX}" == "zellij" ]]; then
-    if command -v zellij &> /dev/null; then
-      # List Zellij sessions
-      ZJ_SESSIONS=$(zellij list-sessions)
-      NO_SESSIONS=$(echo "${ZJ_SESSIONS}" | wc -l)
-
-      # Attach to the main session or create a new one if none exists
-      if [[ "${NO_SESSIONS}" -gt 2 ]]; then
-        # Attach to any session using fzf if no 'main' session exists
-        zellij attach "$(echo "${ZJ_SESSIONS}" | fzf)"
-      elif echo "${ZJ_SESSIONS}" | grep -q 'main'; then
-        # Check if currently in the 'main' session
-        if ! [[ "$ZELLIJ" == 0 ]] && ! [[ "$ZELLIJ_SESSION_NAME" == "main" ]]; then
-          zellij attach main
-        fi
-      else
-        zellij attach -c main
-      fi
-      # Setup Zellij completions and environment
-      source <(zellij setup --generate-completion zsh | sed '/_zellij "$@"/d')
-    else
-      echo "Package zellij is missing!"
-    fi
-  elif [[ "${MUX}" == "tmux" ]]; then
+if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" ]]; then
+  if [[ "${MUX}" == "tmux" ]]; then
     if command -v tmux &> /dev/null; then
       if [ -z "${TMUX}" ]; then
         if tmux ls | grep -qv attached; then
@@ -121,10 +98,6 @@ alias tmux_debug='tmux kill-server && tmux -f ~/.config/tmux/tmux.conf > tmux.lo
 alias tmux_attach='tmux attach -d -t' # Attach to a detached session. Usage: tmux_attach <session_name/id>
 alias tmux_switch='tmux switch-client -t' # Switch to another client. Usage: tmux_switch <session_name/id>
 alias tmux_kill_session='tmux kill-session -t' # Kill a session. Usage: tmux_killsession <session_name/id>
-
-# Zellij aliases
-alias zj='zellij'
-alias zrf='zj run -f -- '
 
 ## Directory aliases
 alias home='cd ~'
