@@ -4,18 +4,16 @@ command_exists() {
 }
 
 if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" ]]; then
-  if [[ "${MUX}" == "tmux" ]]; then
-    if command -v tmux &> /dev/null; then
-      if [ -z "${TMUX}" ]; then
-        if tmux ls | grep -qv attached; then
-          exec tmux attach
-        else
-          exec tmux new-session
-        fi
+  if command -v tmux &> /dev/null; then
+    if [ -z "${TMUX}" ]; then
+      if tmux ls | grep -qv attached; then
+        exec tmux attach
+      else
+        exec tmux new-session
       fi
-    else
-      echo "Package tmux is missing!"
     fi
+  else
+    echo "Package tmux is missing!"
   fi
 fi
 
