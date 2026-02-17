@@ -6,7 +6,7 @@
 config-file = ?os/current.conf
 
 # Core modules
-config-file = theme.conf
+config-file = themes/catppuccin.conf
 config-file = appearance.conf
 config-file = keybinds.conf
 config-file = quick-terminal.conf

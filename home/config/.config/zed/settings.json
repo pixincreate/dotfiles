@@ -13,10 +13,14 @@
   },
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "Kanagawa Dragon",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
   },
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
+  },
   // Features that can be globally enabled or disabled
   // The name of a font to use for rendering text in the editor
   // ".ZedMono" currently aliases to Lilex
