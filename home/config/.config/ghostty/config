@@ -11,6 +11,9 @@ config-file = appearance.conf
 config-file = keybinds.conf
 config-file = quick-terminal.conf
 
+# Font
+font-family = "JetBrains Mono"
+
 # Shell integration
 shell-integration = detect
 shell-integration-features = cursor,title,sudo,ssh-terminfo,path
