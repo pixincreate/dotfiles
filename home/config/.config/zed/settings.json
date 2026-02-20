@@ -25,7 +25,7 @@
   // The name of a font to use for rendering text in the editor
   // ".ZedMono" currently aliases to Lilex
   // but this may change in the future.
-  "buffer_font_family": "JetBrainsMono Nerd Font Propo",
+  "buffer_font_family": "JetBrainsMonoNL Nerd Font",
   // The default font size for text in the editor
   "buffer_font_size": 13,
   // The weight of the editor font in standard CSS units from 100 to 900.
@@ -34,7 +34,7 @@
   // You can set this to ".SystemUIFont" to use the system font
   // ".ZedSans" currently aliases to "IBM Plex Sans", but this may
   // change in the future
-  "ui_font_family": "JetBrainsMono Nerd Font Propo",
+  "ui_font_family": "JetBrainsMono Nerd Font Mono",
   // Active pane styling settings.
   "active_pane_modifiers": {
     // Inset border size of the active pane, in pixels.
@@ -209,7 +209,7 @@
       // "KEY": "value1:value2"
     },
 
-    "font_family": "JetBrainsMono Nerd Font Propo",
+    "font_family": "JetBrainsMonoNL Nerd Font Propo",
     // Sets the maximum number of lines in the terminal's scrollback buffer.
     // Default: 10_000, maximum: 100_000 (all bigger values set will be treated as 100_000), 0 disables the scrolling.
     // Existing terminals will not pick up this change until they are recreated.
