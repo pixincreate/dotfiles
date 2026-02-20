@@ -208,6 +208,12 @@
     "env": {
       // "KEY": "value1:value2"
     },
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-c", "tmux new-session -A -s main"]
+      }
+    },
 
     "font_family": "JetBrainsMonoNL Nerd Font Propo",
     // Sets the maximum number of lines in the terminal's scrollback buffer.
