@@ -110,4 +110,4 @@ fc-cache -fv
 
 ## License
 
-GPL 3.0
+CC0 1.0 Universal
