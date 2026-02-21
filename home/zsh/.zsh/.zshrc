@@ -93,6 +93,7 @@ alias hish='cat $ZDOTDIR/.zsh_history | fzf'
 
 # Tmux aliases
 alias tbg='tmux kill-server && tmux -f ~/.config/tmux/tmux.conf > tmux.log 2>&1'
+alias tls='tmux ls'
 alias tll='tmux list-panes -s -F "#{session_name}: #{pane_current_command}" 2>/dev/null || tmux list-windows -F "#{session_name}: #{window_name}"'
 
 ## Directory aliases
