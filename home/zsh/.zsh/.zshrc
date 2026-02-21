@@ -3,7 +3,7 @@ command_exists() {
   command -v "$1" > /dev/null 2>&1
 }
 
-if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" ]]; then
+if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" || "$TERM_PROGRAM" = "zed" ]]; then
   if command -v tmux &> /dev/null; then
     if [ -z "${TMUX}" ]; then
       if tmux ls | grep -qv attached; then
@@ -92,10 +92,8 @@ alias inv='nvim $(fzf -m --preview="bat --color=always {}")'  # Open files in nv
 alias hish='cat $ZDOTDIR/.zsh_history | fzf'
 
 # Tmux aliases
-alias tmux_debug='tmux kill-server && tmux -f ~/.config/tmux/tmux.conf > tmux.log 2>&1'
-alias tmux_attach='tmux attach -d -t' # Attach to a detached session. Usage: tmux_attach <session_name/id>
-alias tmux_switch='tmux switch-client -t' # Switch to another client. Usage: tmux_switch <session_name/id>
-alias tmux_kill_session='tmux kill-session -t' # Kill a session. Usage: tmux_killsession <session_name/id>
+alias tbg='tmux kill-server && tmux -f ~/.config/tmux/tmux.conf > tmux.log 2>&1'
+alias tll='tmux list-panes -s -F "#{session_name}: #{pane_current_command}" 2>/dev/null || tmux list-windows -F "#{session_name}: #{window_name}"'
 
 ## Directory aliases
 alias home='cd ~'
@@ -279,17 +277,6 @@ up() {
     d=..
   fi
   cd $d
-}
-
-# Tmux specific functions
-function rsc() {
-  CLIENTID=$1.`date +%S`
-  tmux new-session -d -t $1 -s $CLIENTID \; set-option destroy-unattached \; attach-session -t $CLIENTID
-}
-
-function mksc() {
-  tmux new-session -d -s $1
-  rsc $1
 }
 
 # ZGenom
