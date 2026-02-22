@@ -225,6 +225,8 @@
   // and change the value to `false`.
   "auto_install_extensions": {
     "assembly": true,
+    "catppuccin": true,
+    "catppuccin-icons": true,
     "csv": true,
     "docker-compose": true,
     "dockerfile": true,
@@ -244,6 +246,7 @@
     "log": true,
     "lua": true,
     "make": true,
+    "markdown-oxide": true,
     "material-icon-theme": true,
     "nix": true,
     "nu": true,
