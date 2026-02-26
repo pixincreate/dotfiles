@@ -1,98 +1,92 @@
 # Tmux Guide
 
-## Why Tmux?
-
-Run servers (tailscale, work projects) in tmux panes. They survive:
-
-- Terminal restarts (Zed, Ghostty)
-- Mac restarts
-
 ## Quick Start
 
 ```bash
-tmux                  # start tmux
 tmux new -s work     # start with name
 tmux a               # attach to last session
-tmux a -t work      # attach to specific session
+tmux a -t work       # attach to specific session
 ```
 
 ---
 
 ## Prefix
 
-**Prefix = `Ctrl+A`**
-
-All commands below use Prefix.
+**Prefix = `Ctrl+A`** (changed from Ctrl+B)
 
 ---
 
 ## Panes
 
-| Key         | Action               |
-| ----------- | -------------------- |
-| `\`         | Split vertical       |
-| `-`         | Split horizontal     |
-| `h/j/k/l`   | Navigate (vim-style) |
-| `Alt+Arrow` | Navigate (no prefix) |
-| `x`         | Close pane           |
-| `z`         | Zoom pane            |
-| `o`         | Cycle panes          |
+| Key              | Action               |
+| ---------------- | ------------------- |
+| `\`              | Split vertical      |
+| `-`              | Split horizontal    |
+| `h/j/k/l`        | Navigate (vim-style)|
+| `Alt+H/J/K/L`    | Navigate (no prefix)|
+| `Alt+Z`          | Toggle zoom         |
+| `Alt+Shift+H/J`  | Swap with pane      |
+| `o`              | Cycle panes         |
 
 ---
 
 ## Windows
 
-| Key   | Action          |
-| ----- | --------------- |
-| `c`   | New window      |
-| `n`   | Next window     |
-| `p`   | Previous window |
-| `,`   | Rename window   |
-| `&`   | Close window    |
-| `0-9` | Go to window    |
+| Key   | Action              |
+| ----- | ------------------ |
+| `c`   | New window         |
+| `n`   | Next window        |
+| `p`   | Previous window    |
+| `R`   | Rename window      |
+| `K`   | Close window       |
+| `,`/`.` | Swap window left/right |
+| `<`/`>` | Swap window left/right |
+| `0-9` | Go to window       |
 
 ---
 
 ## Sessions
 
-| Key | Action         |
-| --- | -------------- |
+| Key | Action          |
+| --- | ---------------|
 | `d` | Detach         |
 | `$` | Rename session |
+| `S` | Kill session   |
 
 ---
 
 ## Copy Mode
 
-| Key      | Action          |
-| -------- | --------------- |
-| `Enter`  | Enter copy mode |
-| `v`      | Start selection |
-| `y`      | Copy selection  |
-| `Enter`  | Copy selection  |
-| `Ctrl+C` | Copy + exit     |
-| `q`      | Exit            |
-| `Escape` | Exit            |
+| Key        | Action              |
+| ---------- | ------------------ |
+| `Enter`    | Enter copy mode    |
+| `v`        | Start selection    |
+| `y`        | Copy selection    |
+| `r`        | Rectangle toggle  |
+| `q`        | Exit              |
+| `Escape`   | Exit              |
+| `Alt+F`    | Search            |
 
----
-
-## Copy/Paste (System Clipboard)
-
-| Key            | Action               |
-| -------------- | -------------------- |
-| `Ctrl+Shift+C` | Copy to clipboard    |
-| `Ctrl+Shift+V` | Paste from clipboard |
-
-**Mouse**: Drag to select → auto-copies to clipboard
+**Mouse**: Scroll up enters copy mode
 
 ---
 
 ## Other
 
-| Key      | Action        |
-| -------- | ------------- |
-| `r`      | Reload config |
-| `Meta+K` | Clear screen  |
+| Key        | Action           |
+| ---------- | ---------------- |
+| `r`        | Reload config    |
+| `C`        | Clear history    |
+| `?`        | Show README      |
+
+---
+
+## Session Resurrect
+
+- Auto-saves every 15 minutes
+- Auto-restores on tmux start
+- Manual save: `Prefix + Ctrl+S`
+- Manual restore: `Prefix + Ctrl+R`
 
 ---
 

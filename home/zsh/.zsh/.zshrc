@@ -3,7 +3,7 @@ command_exists() {
   command -v "$1" > /dev/null 2>&1
 }
 
-if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" || "$TERM_PROGRAM" = "zed" ]]; then
+if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" ]]; then
   if command -v tmux &> /dev/null; then
     if [ -z "${TMUX}" ]; then
       if tmux ls | grep -qv attached; then
