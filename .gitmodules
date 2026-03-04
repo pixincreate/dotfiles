@@ -34,6 +34,6 @@
 [submodule "home/config/.config/tmux/plugins/tmux-thumbs"]
 	path = home/config/.config/tmux/plugins/tmux-thumbs
 	url = https://github.com/fcsonline/tmux-thumbs.git
-[submodule "home/config/.config/tmux/plugins/tpm"]
-	path = home/config/.config/tmux/plugins/tpm
+[submodule "home/config/.config/tmux/plugins/tpack"]
+	path = home/config/.config/tmux/plugins/tpack
 	url = https://github.com/tmuxpack/tpack.git
