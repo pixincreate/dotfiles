@@ -254,6 +254,7 @@
     "rescript": true,
     "ruff": true,
     "sql": true,
+    "swift": true,
     "toml": true,
     "verilog": true,
     "xml": true,
