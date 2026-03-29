@@ -96,7 +96,7 @@ fish_style_pwd_dir_length = 0
 "Downloads" = " "
 "Music" = "󰝚 "
 "Pictures" = " "
-"Dev" = "󰲋 "
+"dev" = "󰲋 "
 
 [git_branch]
 format = " on [$symbol$branch(:$remote_branch)]($style) "
