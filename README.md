@@ -11,7 +11,7 @@ Personal dotfiles managed with GNU Stow.
 eval "$(curl -fsSL https://raw.githubusercontent.com/pixincreate/omaforge/main/unix/setup)"
 
 # Or manually clone both repos
-git clone https://github.com/pixincreate/dotfiles.git ~/.dotfiles
+git clone --recurse-submodules -j8 https://github.com/pixincreate/dotfiles.git ~/.dotfiles
 git clone https://github.com/pixincreate/omaforge.git ~/.omaforge
 
 # Then run setup
