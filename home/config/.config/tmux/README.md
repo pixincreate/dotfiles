@@ -27,6 +27,7 @@ tmux a -t work       # attach to specific session
 | `Alt+Z`          | Toggle zoom         |
 | `Alt+Shift+H/J`  | Swap with pane      |
 | `o`              | Cycle panes         |
+| `x`              | Kill pane           |
 
 ---
 
@@ -81,12 +82,20 @@ tmux a -t work       # attach to specific session
 
 ---
 
-## Session Resurrect
+## Session Resurrect (Continuum)
 
 - Auto-saves every 15 minutes
 - Auto-restores on tmux start
 - Manual save: `Prefix + Ctrl+S`
 - Manual restore: `Prefix + Ctrl+R`
+- Auto-boots into Ghostty terminal
+
+---
+
+## Status Bar
+
+- Shows session name (left)
+- Shows date and time (right): `YYYY-MM-DD HH:MM`
 
 ---
 
