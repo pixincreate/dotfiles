@@ -101,20 +101,24 @@
   "use_smartcase_search": true,
   "project_panel": {
     // Spacing between worktree entries in the project panel. Can be 'comfortable' or 'standard'.
+    "dock": "left",
     "entry_spacing": "standard",
   },
   "outline_panel": {
     // Whether to show the outline panel button in the status bar
+    "dock": "left",
     "button": false,
   },
   "collaboration_panel": {
     // Whether to show the collaboration panel button in the status bar.
+    "dock": "left",
     "button": false,
   },
   "git_panel": {
     // What branch name to use if `init.defaultBranch` is not set
     //
     // Default: main
+    "dock": "left",
     "default_width": 360.0,
     "button": true,
     "collapse_untracked_diff": true,
@@ -123,6 +127,7 @@
     "fallback_branch_name": "master",
   },
   "agent": {
+    "dock": "right",
     "tool_permissions": {
       "default": "allow",
     },
