@@ -6,7 +6,7 @@
   // - "light": Use the theme indicated by the "light" field
   // - "dark": Use the theme indicated by the "dark" field
   "edit_predictions": {
-    "provider": "ollama",
+    "provider": "copilot",
   },
   "session": {
     "trust_all_worktrees": true,
