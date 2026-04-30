@@ -3,7 +3,7 @@
 # Shows OSD toast when power profile changes via Fn+F5
 # Also switches supergfxctl GPU mode based on profile
 
-current_profile=$(asusctl profile --profile-get 2>/dev/null | grep "Active profile" | awk '{print $4}')
+current_profile=$(asusctl profile get 2>/dev/null | grep "Active profile" | awk '{print $3}')
 
 case "$current_profile" in
     "Quiet")
