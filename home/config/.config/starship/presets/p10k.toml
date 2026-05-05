@@ -176,7 +176,7 @@ vimcmd_symbol = "[❮](bold #cba6f7)"  # Catppuccin Mauve
 
 # Language-specific modules that show next to git branch when in those project types
 [python]
-format = '[$symbol(\($virtualenv\) )]($style)'
+format = '[$symbol($version )(\($virtualenv\) )]($style)'
 symbol = " "
 style = "dimmed #89b4fa" # Catppuccin Blue
 detect_extensions = ["py"]
