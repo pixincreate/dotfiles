@@ -1,11 +1,28 @@
 # Tmux Guide
 
+## First Time Setup
+
+After stowing dotfiles, run these once:
+
+```bash
+# Initialize git submodules (tpack + plugins)
+cd ~/.dotfiles && git submodule update --init --recursive
+
+# Reload tmux config and install plugins
+tmux source ~/.config/tmux/tmux.conf
+
+# Press Prefix + I to install all plugins
+```
+
+---
+
 ## Quick Start
 
 ```bash
-tmux new -s work     # start with name
+tmux new -s work     # start session with name
 tmux a               # attach to last session
 tmux a -t work       # attach to specific session
+tls                  # list all sessions
 ```
 
 ---
@@ -18,38 +35,38 @@ tmux a -t work       # attach to specific session
 
 ## Panes
 
-| Key              | Action               |
-| ---------------- | ------------------- |
-| `\`              | Split vertical      |
-| `-`              | Split horizontal    |
-| `h/j/k/l`        | Navigate (vim-style)|
-| `Alt+H/J/K/L`    | Navigate (no prefix)|
-| `Alt+Z`          | Toggle zoom         |
-| `Alt+Shift+H/J`  | Swap with pane      |
-| `o`              | Cycle panes         |
-| `x`              | Kill pane           |
+| Key             | Action               |
+| --------------- | -------------------- |
+| `\`             | Split vertical       |
+| `-`             | Split horizontal     |
+| `h/j/k/l`       | Navigate (vim-style) |
+| `Alt+H/J/K/L`   | Navigate (no prefix) |
+| `Alt+Z`         | Toggle zoom          |
+| `Alt+Shift+H/J` | Swap with pane       |
+| `o`             | Cycle panes          |
+| `x`             | Kill pane            |
 
 ---
 
 ## Windows
 
-| Key   | Action              |
-| ----- | ------------------ |
-| `c`   | New window         |
-| `n`   | Next window        |
-| `p`   | Previous window    |
-| `R`   | Rename window      |
-| `K`   | Close window       |
+| Key     | Action                 |
+| ------- | ---------------------- |
+| `c`     | New window             |
+| `n`     | Next window            |
+| `p`     | Previous window        |
+| `R`     | Rename window          |
+| `K`     | Close window           |
 | `,`/`.` | Swap window left/right |
 | `<`/`>` | Swap window left/right |
-| `0-9` | Go to window       |
+| `0-9`   | Go to window           |
 
 ---
 
 ## Sessions
 
-| Key | Action          |
-| --- | ---------------|
+| Key | Action         |
+| --- | -------------- |
 | `d` | Detach         |
 | `$` | Rename session |
 | `S` | Kill session   |
@@ -58,15 +75,15 @@ tmux a -t work       # attach to specific session
 
 ## Copy Mode
 
-| Key        | Action              |
-| ---------- | ------------------ |
-| `Enter`    | Enter copy mode    |
-| `v`        | Start selection    |
-| `y`        | Copy selection    |
-| `r`        | Rectangle toggle  |
-| `q`        | Exit              |
-| `Escape`   | Exit              |
-| `Alt+F`    | Search            |
+| Key      | Action           |
+| -------- | ---------------- |
+| `Enter`  | Enter copy mode  |
+| `v`      | Start selection  |
+| `y`      | Copy selection   |
+| `r`      | Rectangle toggle |
+| `q`      | Exit             |
+| `Escape` | Exit             |
+| `Alt+F`  | Search           |
 
 **Mouse**: Scroll up enters copy mode
 
@@ -74,11 +91,11 @@ tmux a -t work       # attach to specific session
 
 ## Other
 
-| Key        | Action           |
-| ---------- | ---------------- |
-| `r`        | Reload config    |
-| `C`        | Clear history    |
-| `?`        | Show README      |
+| Key | Action        |
+| --- | ------------- |
+| `r` | Reload config |
+| `C` | Clear history |
+| `?` | Show README   |
 
 ---
 
@@ -89,6 +106,21 @@ tmux a -t work       # attach to specific session
 - Manual save: `Prefix + Ctrl+S`
 - Manual restore: `Prefix + Ctrl+R`
 - Auto-boots into Ghostty terminal
+
+---
+
+## Plugins Loaded
+
+- **tpack** - Plugin manager
+- **tmux-sensible** - Sensible defaults
+- **tmux-yank** - Enhanced yanking
+- **tmux-resurrect** - Session save/restore
+- **tmux-continuum** - Auto-save/restore
+- **catppuccin** - Theme
+- **vim-tmux-navigator** - Vim integration
+- **tmux-fzf** - Fuzzy session/window finder
+- **tmux-fzf-url** - URL selection
+- **tmux-thumbs** - Fast text selection
 
 ---
 
