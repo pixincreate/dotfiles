@@ -113,14 +113,14 @@ tls                  # list all sessions
 
 - **tpack** - Plugin manager
 - **tmux-sensible** - Sensible defaults
-- **tmux-yank** - Enhanced yanking
+- **tmux-yank** - Enhanced yanking (Prefix + y to copy)
 - **tmux-resurrect** - Session save/restore
 - **tmux-continuum** - Auto-save/restore
 - **catppuccin** - Theme
 - **vim-tmux-navigator** - Vim integration
-- **tmux-fzf** - Fuzzy session/window finder
-- **tmux-fzf-url** - URL selection
-- **tmux-thumbs** - Fast text selection
+- **tmux-fzf** - Fuzzy session/window finder (Prefix + f)
+- **tmux-fzf-url** - URL selection (Prefix + u)
+- **tmux-thumbs** - Fast text selection with thumbnails
 
 ---
 
