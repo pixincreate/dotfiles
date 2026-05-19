@@ -1,6 +1,13 @@
-# API Keys & Secrets
+# Environment variables
 .env
 .env.local
+
+# API Keys and Secrets
 .secrets/
+
+# Private Keys
 *.pem
 *.key
+
+# macOS specific
+.DS_Store
