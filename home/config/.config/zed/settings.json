@@ -255,6 +255,7 @@
     "material-icon-theme": true,
     "nix": true,
     "nu": true,
+    "opencode": true,
     "proto": true,
     "rescript": true,
     "ruff": true,
