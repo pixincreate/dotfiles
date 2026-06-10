@@ -1,12 +1,14 @@
+# shellcheck shell=bash
+
 # A function to check if a command exists
 command_exists() {
   command -v "$1" > /dev/null 2>&1
 }
 
-if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" ]]; then
+if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" || "$TERM_PROGRAM" = "WezTerm" ]]; then
   if command -v tmux &> /dev/null; then
     if [ -z "${TMUX}" ]; then
-      if tmux ls | grep -qv attached; then
+      if tmux list-sessions 2>/dev/null | grep -qv attached; then
         exec tmux attach
       else
         exec tmux new-session
@@ -109,7 +111,6 @@ alias rmd='/bin/rm  --recursive --force --verbose '
 
 ### Alias's for multiple directory listing commands
 alias la='ls -Alh'                # show hidden files
-alias ls='ls -aFh --color=always' # add colors and file type extensions
 alias lx='ls -lXBh'               # sort by extension
 alias lk='ls -lSrh'               # sort by size
 alias lc='ls -lcrh'               # sort by change time
@@ -118,10 +119,9 @@ alias lr='ls -lRh'                # recursive ls
 alias lt='ls -ltrh'               # sort by date
 alias lm='ls -alh |more'          # pipe through 'more'
 alias lw='ls -xAh'                # wide listing format
-alias ll='ls -Fls'                # long listing format
-alias labc='ls -lap'              #alphabetical sort
-alias lf="ls -l | egrep -v '^d'"  # files only
-alias ldir="ls -l | egrep '^d'"   # directories only
+alias labc='ls -lap'              # alphabetical sort
+alias lf="ls -l | grep -Ev '^d'"  # files only
+alias ldir="ls -l | grep -E '^d'" # directories only
 
 ## Alias's to show disk space and space used in a folder
 alias diskspace="du -S | sort -n -r |more"
@@ -149,7 +149,11 @@ alias sha1='openssl sha1'
 alias f="find . | grep "
 
 ## Count all files (recursively) in the current folder
-alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+countfiles() {
+  for t in files links directories; do
+    echo "$(find . -type "${t:0:1}" | wc -l) $t"
+  done 2>/dev/null
+}
 
 ## To see if a command is aliased, a file, or a built-in command
 alias checkcommand="type -t"
@@ -165,7 +169,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -o'
 elif [[ "$OSTYPE" == "linux-android" ]]; then
-  alias pbcopy='termux-clipboard-set $1'
+  pbcopy() { termux-clipboard-set "$1"; }
   alias pbpaste='termux-clipboard-get'
 fi
 
@@ -176,7 +180,7 @@ function whatsmyip() {
     /sbin/ip addr show wlan0 | grep "inet " | awk -F: '{print $1}' | awk '{print $2}'
   else
     echo -n "Internal IP: "
-    /sbin/ifconfig wlan0 | grep "inet " | awk -F: '{print $1} |' | awk '{print $2}'
+    /sbin/ifconfig wlan0 | grep "inet " | awk -F: '{print $1}' | awk '{print $2}'
   fi
 
   # External IP Lookup
@@ -187,18 +191,19 @@ function whatsmyip() {
 extract() {
   for archive in "$@"; do
     if [ -f "$archive" ]; then
+      # shellcheck disable=SC2086
       case $archive in
-        *.tar.bz2) tar xvjf $archive ;;
-        *.tar.gz) tar xvzf $archive ;;
-        *.bz2) bunzip2 $archive ;;
-        *.rar) rar x $archive ;;
-        *.gz) gunzip $archive ;;
-        *.tar) tar xvf $archive ;;
-        *.tbz2) tar xvjf $archive ;;
-        *.tgz) tar xvzf $archive ;;
-        *.zip) unzip $archive ;;
-        *.Z) uncompress $archive ;;
-        *.7z) 7z x $archive ;;
+        *.tar.bz2) tar xvjf "$archive" ;;
+        *.tar.gz) tar xvzf "$archive" ;;
+        *.bz2) bunzip2 "$archive" ;;
+        *.rar) rar x "$archive" ;;
+        *.gz) gunzip "$archive" ;;
+        *.tar) tar xvf "$archive" ;;
+        *.tbz2) tar xvjf "$archive" ;;
+        *.tgz) tar xvzf "$archive" ;;
+        *.zip) unzip "$archive" ;;
+        *.Z) uncompress "$archive" ;;
+        *.7z) 7z x "$archive" ;;
         *) echo "don't know how to extract '$archive'..." ;;
       esac
     else
@@ -267,8 +272,7 @@ mkdirg() {
 
 # Goes up a specified number of directories  (i.e. up 4)
 up() {
-  local d=""
-  limit=$1
+  local d="" limit="$1"
   for ((i = 1; i <= limit; i++)); do
     d=$d/..
   done
@@ -276,7 +280,7 @@ up() {
   if [ -z "$d" ]; then
     d=..
   fi
-  cd $d
+  cd "$d"
 }
 
 # ZGenom
