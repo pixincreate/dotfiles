@@ -1,4 +1,5 @@
 
+# shellcheck shell=bash
 # Detect the current running shell, not the default shell
 if [ -n "$ZSH_VERSION" ]; then
     CURRENT_SHELL="zsh"
@@ -29,7 +30,9 @@ if [ "$CURRENT_SHELL" = "zsh" ]; then
         fi
 
         # Set minimal transient prompt with newline for spacing
+        # shellcheck disable=SC2034 # PROMPT/RPROMPT are zsh built-in special variables used externally
         PROMPT="$prompt_char "
+        # shellcheck disable=SC2034
         RPROMPT=''
     }
 
@@ -56,6 +59,7 @@ if [ "$CURRENT_SHELL" = "zsh" ]; then
         # Only setup transient prompt if enabled
         if [[ "$STARSHIP_TRANSIENT_PROMPT" == "true" ]] && [[ -z "$_STARSHIP_TRANSIENT_SETUP" ]]; then
             # Register the ZLE widgets only if zle is available
+            # shellcheck disable=SC2154 # widgets is a zsh builtin associative array
             if [[ -n "$ZSH_VERSION" ]] && (($+widgets)); then
                 zle -N zle-line-finish _starship_zle_line_finish
                 zle -N zle-line-init _starship_zle_line_init

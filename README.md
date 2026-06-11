@@ -4,19 +4,19 @@ Personal dotfiles managed with GNU Stow.
 
 ## Installation
 
-### Recommended (with Omaforge)
+### Recommended (with Rig)
 
 ```bash
 # One-line installer (recommended)
-eval "$(curl -fsSL https://raw.githubusercontent.com/pixincreate/omaforge/main/unix/setup)"
+eval "$(curl -fsSL https://raw.githubusercontent.com/pixincreate/rig/main/unix/setup)"
 
 # Or manually clone both repos
 git clone --recurse-submodules -j8 https://github.com/pixincreate/dotfiles.git ~/.dotfiles
-git clone https://github.com/pixincreate/omaforge.git ~/.omaforge
+git clone https://github.com/pixincreate/rig.git ~/.rig
 
 # Then run setup
-cd ~/.omaforge/unix/macos && ./macos-setup   # macOS
-cd ~/.omaforge/unix/fedora && ./fedora-setup # Fedora
+cd ~/.rig/unix/macos && ./macos-setup   # macOS
+cd ~/.rig/unix/fedora && ./fedora-setup # Fedora
 ```
 
 ### Manual (Stow only)
@@ -81,17 +81,17 @@ stow --no-folding --restow --dir=home --target=$HOME <package-name>
 stow --delete --dir=home --target=$HOME <package-name>
 ```
 
-### Using Omaforge utilities
+### Using Rig utilities
 
 ```bash
 # Stow all packages
-omaforge-stow --all
+rig-stow --all
 
 # Stow specific packages
-omaforge-stow config zsh
+rig-stow config zsh
 
 # Restow
-omaforge-stow -R --all
+rig-stow -R --all
 ```
 
 ## Fonts
