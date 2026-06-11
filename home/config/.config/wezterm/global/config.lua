@@ -24,7 +24,7 @@ return function(config)
     config.scroll_to_bottom_on_input = true
     config.scrollback_lines = 350000
 
-    config.enable_kitty_keyboard = true
+    config.enable_kitty_keyboard = false
     config.selection_word_boundary = " \t\n{}[]()\"'`,;:@│┃"
 
     config.tab_bar_at_bottom = false
