@@ -45,7 +45,7 @@ return {
 
     { key = 'p', mods = 'META|SHIFT', action = act.ActivateCommandPalette },
 
-    { key = 'r', mods = 'CTRL|META',  action = act.ReloadConfiguration },
+    { key = 'r', mods = 'CTRL|SHIFT', action = act.ReloadConfiguration },
 
     { key = 'f', mods = 'META',       action = act.ToggleFullScreen },
 

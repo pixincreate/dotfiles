@@ -25,6 +25,7 @@ return function(config)
     config.scrollback_lines = 350000
 
     config.enable_kitty_keyboard = false
+    config.enable_csi_u_key_encoding = true
     config.selection_word_boundary = " \t\n{}[]()\"'`,;:@│┃"
 
     config.tab_bar_at_bottom = false
