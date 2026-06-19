@@ -5,6 +5,9 @@
   // - "system": Use the theme that corresponds to the system's appearance
   // - "light": Use the theme indicated by the "light" field
   // - "dark": Use the theme indicated by the "dark" field
+  "inlay_hints": {
+    "enabled": true
+  },
   "edit_predictions": {
     "provider": "copilot",
   },
