@@ -9,4 +9,5 @@
     "enabled": true,
   },
   "diff_style": "auto",
+  "plugin": [["{env:SESH_TUI_PLUGIN}", { "limit": 50 }]],
 }

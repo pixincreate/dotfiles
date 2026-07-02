@@ -12,16 +12,6 @@
       "enabled": true,
     },
   },
-  "plugin": [
-    "@tarquinen/opencode-dcp@latest",
-    "oh-my-openagent@latest",
-    "$SESH_PLUGIN",
-  ],
+  "plugin": ["@tarquinen/opencode-dcp@latest", "oh-my-openagent@latest"],
   "provider": {},
-  "command": {
-    "sessions-global": {
-      "description": "List sessions from ALL directories",
-      "template": "sessions-global list",
-    },
-  },
 }

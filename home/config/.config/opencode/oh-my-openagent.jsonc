@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+
+  "agents": {
+    "sisyphus": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        "opencode-go/glm-5.2",
+        "opencode-go/minimax-m3",
+        "opencode-go/deepseek-v4-pro",
+      ],
+    },
+    "hephaestus": { "model": "opencode-go/deepseek-v4-pro" },
+    "oracle": { "model": "opencode-go/glm-5.2" },
+    "prometheus": { "model": "opencode-go/kimi-k2.6" },
+    "atlas": { "model": "opencode-go/kimi-k2.6" },
+    "explore": { "model": "opencode-go/deepseek-v4-flash" },
+    "librarian": { "model": "opencode-go/deepseek-v4-flash" },
+    "metis": { "model": "opencode-go/kimi-k2.6" },
+    "momus": { "model": "opencode-go/minimax-m3" },
+  },
+
+  "categories": {
+    "quick": { "model": "opencode-go/deepseek-v4-flash" },
+    "unspecified-low": { "model": "opencode-go/deepseek-v4-flash" },
+    "unspecified-high": { "model": "opencode-go/kimi-k2.6" },
+    "deep": { "model": "opencode-go/minimax-m3" },
+    "ultrabrain": { "model": "opencode-go/glm-5.2" },
+    "visual-engineering": { "model": "opencode-go/qwen-3.7-plus" },
+    "writing": { "model": "opencode-go/kimi-k2.6" },
+  },
+
+  "runtime_fallback": {
+    "enabled": true,
+    "retry_on_errors": [429, 500, 502, 503, 504],
+    "max_fallback_attempts": 3,
+    "cooldown_seconds": 60,
+  },
+
+  "background_task": {
+    "defaultConcurrency": 3,
+    "providerConcurrency": {
+      "opencode-go": 10,
+    },
+  },
+}
