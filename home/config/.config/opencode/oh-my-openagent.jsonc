@@ -1,33 +1,115 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
 
+  "telemetry": false,
+
+  "model_fallback": true,
+
   "agents": {
     "sisyphus": {
-      "model": "opencode-go/kimi-k2.6",
+      "model": "opencode-go/kimi-k2.7-code",
       "fallback_models": [
-        "opencode-go/glm-5.2",
         "opencode-go/minimax-m3",
         "opencode-go/deepseek-v4-pro",
+        "github-copilot/gpt-5.3-codex",
       ],
     },
-    "hephaestus": { "model": "opencode-go/deepseek-v4-pro" },
-    "oracle": { "model": "opencode-go/glm-5.2" },
-    "prometheus": { "model": "opencode-go/kimi-k2.6" },
-    "atlas": { "model": "opencode-go/kimi-k2.6" },
-    "explore": { "model": "opencode-go/deepseek-v4-flash" },
-    "librarian": { "model": "opencode-go/deepseek-v4-flash" },
-    "metis": { "model": "opencode-go/kimi-k2.6" },
-    "momus": { "model": "opencode-go/minimax-m3" },
+    "hephaestus": {
+      "model": "opencode-go/kimi-k2.7-code",
+      "fallback_models": [
+        "opencode-go/minimax-m3",
+        "opencode-go/deepseek-v4-pro",
+        "github-copilot/gpt-5.3-codex",
+      ],
+    },
+    "oracle": {
+      "model": "opencode-go/glm-5.2",
+      "fallback_models": [
+        "opencode-go/qwen3.7-max",
+        "opencode-go/minimax-m3",
+        "github-copilot/gpt-5.4",
+      ],
+    },
+    "prometheus": {
+      "model": "opencode-go/kimi-k2.7-code",
+      "fallback_models": [
+        "opencode-go/minimax-m3",
+        "github-copilot/gpt-5.3-codex",
+      ],
+    },
+    "atlas": {
+      "model": "opencode-go/kimi-k2.7-code",
+      "fallback_models": [
+        "opencode-go/minimax-m3",
+        "github-copilot/gpt-5.3-codex",
+      ],
+    },
+    "explore": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": ["opencode-go/mimo-v2.5"],
+    },
+    "librarian": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": ["opencode-go/mimo-v2.5"],
+    },
+    "metis": {
+      "model": "opencode-go/kimi-k2.7-code",
+      "fallback_models": [
+        "opencode-go/minimax-m3",
+        "github-copilot/gpt-5.3-codex",
+      ],
+    },
+    "momus": {
+      "model": "opencode-go/minimax-m3",
+      "fallback_models": ["opencode-go/glm-5.2", "github-copilot/gpt-5.4"],
+    },
   },
 
   "categories": {
-    "quick": { "model": "opencode-go/deepseek-v4-flash" },
-    "unspecified-low": { "model": "opencode-go/deepseek-v4-flash" },
-    "unspecified-high": { "model": "opencode-go/kimi-k2.6" },
-    "deep": { "model": "opencode-go/minimax-m3" },
-    "ultrabrain": { "model": "opencode-go/glm-5.2" },
-    "visual-engineering": { "model": "opencode-go/qwen-3.7-plus" },
-    "writing": { "model": "opencode-go/kimi-k2.6" },
+    "quick": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": ["opencode-go/mimo-v2.5"],
+    },
+    "unspecified-low": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": ["opencode-go/mimo-v2.5"],
+    },
+    "unspecified-high": {
+      "model": "opencode-go/kimi-k2.7-code",
+      "fallback_models": [
+        "opencode-go/minimax-m3",
+        "github-copilot/gpt-5.3-codex",
+      ],
+    },
+    "deep": {
+      "model": "opencode-go/minimax-m3",
+      "fallback_models": [
+        "opencode-go/kimi-k2.7-code",
+        "github-copilot/gpt-5.3-codex",
+      ],
+    },
+    "ultrabrain": {
+      "model": "opencode-go/glm-5.2",
+      "fallback_models": [
+        "opencode-go/qwen3.7-max",
+        "opencode-go/minimax-m3",
+        "github-copilot/gpt-5.4",
+      ],
+    },
+    "visual-engineering": {
+      "model": "opencode-go/qwen3.7-plus",
+      "fallback_models": [
+        "opencode-go/kimi-k2.7-code",
+        "github-copilot/gpt-5.4",
+      ],
+    },
+    "writing": {
+      "model": "opencode-go/kimi-k2.7-code",
+      "fallback_models": [
+        "github-copilot/gpt-5.4-mini",
+        "opencode-go/minimax-m3",
+      ],
+    },
   },
 
   "runtime_fallback": {
@@ -35,12 +117,23 @@
     "retry_on_errors": [429, 500, 502, 503, 504],
     "max_fallback_attempts": 3,
     "cooldown_seconds": 60,
+    "timeout_seconds": 180,
+    "notify_on_fallback": true,
   },
 
   "background_task": {
     "defaultConcurrency": 3,
     "providerConcurrency": {
-      "opencode-go": 10,
+      "opencode-go": 4,
+      "github-copilot": 2,
+      "opencode": 1,
+      "nvidia": 1,
+    },
+    "modelConcurrency": {
+      "opencode-go/glm-5.2": 1,
+      "opencode-go/qwen3.7-max": 1,
+      "github-copilot/gpt-5.3-codex": 1,
+      "github-copilot/gpt-5.4": 1,
     },
   },
 }
