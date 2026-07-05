@@ -126,8 +126,24 @@ tls                  # list all sessions
 
 ## Status Bar
 
-- Shows session name (left)
-- Shows date and time (right): `YYYY-MM-DD HH:MM`
+Light, minimal status bar with muted colors and useful information.
+
+**Left side:**
+
+- Session name (muted teal on medium light gray)
+
+**Right side:**
+
+- Hostname
+- Date and time (`YYYY-MM-DD HH:MM`)
+
+**Windows:**
+
+- Simple text format: `#I:#W` (window number:name)
+- Active window highlighted with teal background and light text
+- Windows separated by double spaces
+
+The status bar refreshes every 5 seconds. Continuum's auto-save runs silently in the background.
 
 ---
 
