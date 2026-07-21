@@ -1,17 +1,89 @@
 {
   "$schema": "https://opencode.ai/config.json",
+
+  "share": "disabled",
+  "autoupdate": false,
+  "subagent_depth": 1,
+
   "mcp": {
     "deepwiki": {
       "type": "remote",
       "url": "https://mcp.deepwiki.com/mcp",
-      "enabled": true,
+      "enabled": true
     },
     "grep": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": true,
-    },
+      "enabled": true
+    }
   },
-  "plugin": ["@tarquinen/opencode-dcp@latest", "oh-my-openagent@latest"],
-  "provider": {},
+
+  "enabled_providers": [
+    "opencode-go",
+    "openai",
+    "github-copilot",
+    "ollama-cloud",
+    "nvidia"
+  ],
+
+  "experimental": {
+    "policies": [
+      { "effect": "deny", "action": "provider.use", "resource": "anthropic" },
+      { "effect": "deny", "action": "provider.use", "resource": "google" },
+      { "effect": "deny", "action": "provider.use", "resource": "gemini" },
+      { "effect": "deny", "action": "provider.use", "resource": "azure-openai" },
+      { "effect": "deny", "action": "provider.use", "resource": "amazon-bedrock" },
+      { "effect": "deny", "action": "provider.use", "resource": "google-vertex" },
+      { "effect": "deny", "action": "provider.use", "resource": "openrouter" }
+    ]
+  },
+
+  "permission": {
+    "*": "ask",
+
+    "bash": {
+      "*": "ask",
+      "rm -rf *": "deny",
+      "rm -rf /": "deny",
+      "sudo *": "deny",
+      "su *": "deny",
+      "chown -R *": "deny",
+      "chmod -R 777 *": "deny",
+      "chmod 777 *": "deny",
+      "mkfs*": "deny",
+      "dd *": "deny",
+      "cat ~/.ssh/*": "deny",
+      "cat ~/.aws/*": "deny",
+      "cat ~/.env*": "deny",
+      "cat ~/.npmrc*": "deny",
+      "cat ~/.netrc*": "deny",
+      "cat ~/.pki/*": "deny",
+      "cat ~/.kube/*": "deny",
+      "less ~/.ssh/*": "deny",
+      "head ~/.ssh/*": "deny"
+    },
+
+    "edit": "ask",
+    "write": "ask",
+    "read": "allow",
+    "external_directory": "ask",
+    "webfetch": "ask",
+    "websearch": "ask",
+    "task": "ask",
+    "doom_loop": "deny",
+    "skill": "allow",
+    "question": "allow",
+    "todowrite": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow"
+  },
+
+  "plugin": [
+    "@tarquinen/opencode-dcp@latest",
+    "oh-my-openagent@latest"
+  ],
+
+  "provider": {}
 }
