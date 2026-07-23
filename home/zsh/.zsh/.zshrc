@@ -5,19 +5,48 @@ command_exists() {
   command -v "$1" > /dev/null 2>&1
 }
 
-if [[ "$TERM" = "alacritty" || "$TERM" = "xterm-ghostty" || "$TERM_PROGRAM" = "WezTerm" ]]; then
-  if command -v tmux &> /dev/null; then
-    if [ -z "${TMUX}" ]; then
-      if tmux list-sessions 2>/dev/null | grep -qv attached; then
-        exec tmux attach
-      else
-        exec tmux new-session
-      fi
-    fi
-  else
-    echo "Package tmux is missing!"
+# Auto-start tmux in all terminals unless explicitly opted out
+__start_tmux() {
+  if [ -n "$TMUX" ] || [ -n "$NO_TMUX" ] || ! command -v tmux &> /dev/null; then
+    return 0
   fi
-fi
+
+  case "$TERM_PROGRAM" in
+    vscode)
+      local _session="vscode"
+      if tmux has-session -t "$_session" 2>/dev/null; then
+        exec tmux attach -t "$_session"
+      else
+        exec tmux new-session -s "$_session"
+      fi
+      ;;
+    zed)
+      local _dir="${PWD}"
+      # Zed sometimes starts shells in /; detect project root from env
+      if [ "$_dir" = "/" ] && [ -n "$ZED_WORKTREE_ROOT" ]; then
+        _dir="$ZED_WORKTREE_ROOT"
+      fi
+      local _project
+      _project=$(basename "$_dir" | tr '.' '_')
+      local _session="zed-${_project}"
+      if tmux has-session -t "$_session" 2>/dev/null; then
+        exec tmux attach -t "$_session"
+      else
+        exec tmux new-session -s "$_session" -c "$_dir"
+      fi
+      ;;
+    *)
+      local _session="main"
+      if tmux has-session -t "$_session" 2>/dev/null; then
+        exec tmux attach -t "$_session"
+      else
+        exec tmux new-session -s "$_session"
+      fi
+      ;;
+  esac
+}
+__start_tmux
+unset -f __start_tmux
 
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
