@@ -5,6 +5,10 @@
   // - "system": Use the theme that corresponds to the system's appearance
   // - "light": Use the theme indicated by the "light" field
   // - "dark": Use the theme indicated by the "dark" field
+  "status_bar": {
+    "show_active_file": true
+  },
+  "proxy": "",
   "theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
@@ -74,6 +78,7 @@
   // Titlebar related settings
   "title_bar": {
     // Whether to show the sign in button in the titlebar.
+    "show_branch_status_icon": true,
     "show_sign_in": false,
   },
   // Minimap related settings
@@ -112,11 +117,11 @@
     // What branch name to use if `init.defaultBranch` is not set
     //
     // Default: main
+    "show_count_badge": true,
     "dock": "left",
     "default_width": 360.0,
     "button": true,
     "collapse_untracked_diff": true,
-    "sort_by_path": false,
     "status_style": "label_color",
     "fallback_branch_name": "master",
   },
@@ -188,6 +193,7 @@
   // Default: false
   "disable_ai": true,
   "edit_predictions": {
+    "allow_data_collection": "no",
     "provider": "copilot",
   },
   // Automatically update Zed. This setting may be ignored on Linux if
@@ -207,6 +213,7 @@
   "terminal": {
     // Any key-value pairs added to this list will be added to the terminal's
     // environment. Use `:` to separate multiple values.
+    "show_count_badge": true,
     "env": {
       // "KEY": "value1:value2"
     },
