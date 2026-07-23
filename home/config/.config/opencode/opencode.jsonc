@@ -39,10 +39,12 @@
   },
 
   "permission": {
-    "*": "ask",
+    "*": "allow",
 
     "bash": {
-      "*": "ask",
+      "*": "allow",
+      
+      // Destructive commands - always deny
       "rm -rf *": "deny",
       "rm -rf /": "deny",
       "sudo *": "deny",
@@ -52,6 +54,8 @@
       "chmod 777 *": "deny",
       "mkfs*": "deny",
       "dd *": "deny",
+      
+      // Credential access - always deny
       "cat ~/.ssh/*": "deny",
       "cat ~/.aws/*": "deny",
       "cat ~/.env*": "deny",
@@ -60,16 +64,33 @@
       "cat ~/.pki/*": "deny",
       "cat ~/.kube/*": "deny",
       "less ~/.ssh/*": "deny",
-      "head ~/.ssh/*": "deny"
+      "head ~/.ssh/*": "deny",
+      
+      // Build/compile - ask (could be slow)
+      "cargo build*": "ask",
+      "cargo test*": "ask",
+      "make *": "ask",
+      "npm *": "ask",
+      "yarn *": "ask",
+      "pnpm *": "ask",
+      "bun *": "ask",
+      "pip *": "ask",
+      "uv *": "ask",
+      
+      // Package install - ask (mutates system)
+      "brew *": "ask",
+      "cargo install*": "ask",
+      "npm install*": "ask",
+      "pip install*": "ask"
     },
 
+    // File operations - ask before mutating
     "edit": "ask",
     "write": "ask",
-    "read": "allow",
     "external_directory": "ask",
-    "webfetch": "ask",
-    "websearch": "ask",
-    "task": "ask",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "task": "allow",
     "doom_loop": "deny",
     "skill": "allow",
     "question": "allow",
@@ -77,7 +98,8 @@
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
-    "lsp": "allow"
+    "lsp": "allow",
+    "read": "allow"
   },
 
   "plugin": [
