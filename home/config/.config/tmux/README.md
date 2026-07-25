@@ -4,6 +4,16 @@ Prefix: **Ctrl+A**
 
 ---
 
+## Hierarchy
+
+| Object  | What it is         | When to create one      |
+| ------- | ------------------ | ----------------------- |
+| Session | A project          | Switching projects      |
+| Window  | A task/tab         | Different task in project |
+| Pane    | A split view       | Need to see 2+ things at once |
+
+One session per project. One window per task. Split into panes only when you need simultaneous visibility.
+
 ## Panes
 
 | Key             | Action                         |
@@ -53,13 +63,14 @@ Prefix: **Ctrl+A**
 
 ## Other
 
-| Key      | Action           |
-| -------- | ---------------- |
-| `r`      | Reload config    |
-| `C`      | Clear history    |
-| `?`      | Show this help   |
-| `Ctrl+s` | Save sessions    |
-| `Ctrl+r` | Restore sessions |
+| Key      | Action                    |
+| -------- | ------------------------- |
+| `r`      | Reload config             |
+| `C`      | Clear history             |
+| `?`      | Show this help            |
+| `N`      | New session (current dir) |
+| `Ctrl+s` | Save sessions             |
+| `Ctrl+r` | Restore sessions          |
 
 ## Plugins
 

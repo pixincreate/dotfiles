@@ -11,39 +11,28 @@ __start_tmux() {
     return 0
   fi
 
+  local _session
   case "$TERM_PROGRAM" in
     vscode)
-      local _session="vscode"
-      if tmux has-session -t "$_session" 2>/dev/null; then
-        exec tmux attach -t "$_session"
-      else
-        exec tmux new-session -s "$_session"
-      fi
+      _session="vscode"
       ;;
     zed)
-      local _dir="${PWD}"
-      # Zed sometimes starts shells in /; detect project root from env
-      if [ "$_dir" = "/" ] && [ -n "$ZED_WORKTREE_ROOT" ]; then
-        _dir="$ZED_WORKTREE_ROOT"
-      fi
-      local _project
-      _project=$(basename "$_dir" | tr '.' '_')
-      local _session="zed-${_project}"
-      if tmux has-session -t "$_session" 2>/dev/null; then
-        exec tmux attach -t "$_session"
+      # Derive session name from project root. Falls back to generic "zed" if
+      # we can't determine a meaningful directory (avoids "zed-/" garbage).
+      local _dir="${ZED_WORKTREE_ROOT:-$PWD}"
+      if [ "$_dir" = "/" ] || [ "$_dir" = "$HOME" ] || [ -z "$_dir" ]; then
+        _session="zed"
       else
-        exec tmux new-session -s "$_session" -c "$_dir"
+        _session="zed-$(basename "$_dir" | tr '.' '_')"
       fi
       ;;
     *)
-      local _session="main"
-      if tmux has-session -t "$_session" 2>/dev/null; then
-        exec tmux attach -t "$_session"
-      else
-        exec tmux new-session -s "$_session"
-      fi
+      _session="main"
       ;;
   esac
+
+  # -A = attach if exists, create if not. One command, no if/else.
+  exec tmux new-session -A -s "$_session"
 }
 __start_tmux
 unset -f __start_tmux
