@@ -4,6 +4,7 @@
   "share": "disabled",
   "autoupdate": false,
   "subagent_depth": 1,
+  "lsp": true,
 
   "mcp": {
     "deepwiki": {
