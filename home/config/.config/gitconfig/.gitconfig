@@ -24,6 +24,10 @@ interHunkContext = 10
 [gpg]
 format = ssh
 
+[tag]
+gpgSign = true
+forcesignannotated = true
+
 [fetch]
 prune = true
 
