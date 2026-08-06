@@ -16,6 +16,11 @@
       "type": "remote",
       "url": "https://mcp.grep.app",
       "enabled": true
+    },
+    "kite": {
+      "type": "remote",
+      "url": "https://mcp.kite.trade/mcp",
+      "enabled": true
     }
   },
 
