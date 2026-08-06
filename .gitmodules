@@ -4,33 +4,3 @@
 [submodule "home/config/.config/alacritty/themes"]
 	path = home/config/.config/alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme.git
-[submodule "home/config/.config/tmux/plugins/tmux-sensible"]
-	path = home/config/.config/tmux/plugins/tmux-sensible
-	url = https://github.com/tmux-plugins/tmux-sensible.git
-[submodule "home/config/.config/tmux/plugins/tmux-yank"]
-	path = home/config/.config/tmux/plugins/tmux-yank
-	url = https://github.com/tmux-plugins/tmux-yank.git
-[submodule "home/config/.config/tmux/plugins/tmux-resurrect"]
-	path = home/config/.config/tmux/plugins/tmux-resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect.git
-[submodule "home/config/.config/tmux/plugins/tmux-continuum"]
-	path = home/config/.config/tmux/plugins/tmux-continuum
-	url = https://github.com/tmux-plugins/tmux-continuum.git
-[submodule "home/config/.config/tmux/plugins/catppuccin"]
-	path = home/config/.config/tmux/plugins/catppuccin
-	url = https://github.com/catppuccin/tmux.git
-[submodule "home/config/.config/tmux/plugins/vim-tmux-navigator"]
-	path = home/config/.config/tmux/plugins/vim-tmux-navigator
-	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "home/config/.config/tmux/plugins/tmux-fzf"]
-	path = home/config/.config/tmux/plugins/tmux-fzf
-	url = https://github.com/sainnhe/tmux-fzf.git
-[submodule "home/config/.config/tmux/plugins/tmux-fzf-url"]
-	path = home/config/.config/tmux/plugins/tmux-fzf-url
-	url = https://github.com/wfxr/tmux-fzf-url.git
-[submodule "home/config/.config/tmux/plugins/tmux-thumbs"]
-	path = home/config/.config/tmux/plugins/tmux-thumbs
-	url = https://github.com/fcsonline/tmux-thumbs.git
-[submodule "home/config/.config/tmux/plugins/tpack"]
-	path = home/config/.config/tmux/plugins/tpack
-	url = https://github.com/tmuxpack/tpack.git
