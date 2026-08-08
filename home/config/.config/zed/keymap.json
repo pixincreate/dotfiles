@@ -21,7 +21,8 @@
   {
     "context": "Terminal",
     "bindings": {
-      "shift-enter": ["terminal::SendText", "\u001b[13;2u"]
+      "shift-enter": ["terminal::SendText", "\u001b[13;2u"],
+      "ctrl-s": ["terminal::SendKeystroke", "ctrl-s"]
     }
   }
 ]
