@@ -31,7 +31,20 @@ __start_tmux() {
       ;;
   esac
 
-  # -A = attach if exists, create if not. One command, no if/else.
+  # -A = attach if exists, create if not.
+  # On a fresh server, start it detached and let continuum auto-restore the
+  # saved sessions first (single creation source). Otherwise we race resurrect:
+  # our session creation + continuum's restore both fire in the 10s window and
+  # scramble the layout. Wait for our target session to appear (or the window
+  # to elapse) before attaching/creating.
+  if ! tmux has-session 2>/dev/null; then
+    tmux start-server
+    local _i=0
+    while [ "$_i" -lt 20 ] && ! tmux has-session -t "$_session" 2>/dev/null; do
+      sleep 0.5
+      _i=$((_i + 1))
+    done
+  fi
   exec tmux new-session -A -s "$_session"
 }
 __start_tmux
