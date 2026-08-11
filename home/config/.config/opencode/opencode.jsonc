@@ -6,6 +6,9 @@
   "subagent_depth": 1,
   "lsp": true,
 
+  "model": "opencode-go/deepseek-v4-flash",
+  "small_model": "opencode/deepseek-v4-flash-free",
+
   "mcp": {
     "deepwiki": {
       "type": "remote",
@@ -111,7 +114,8 @@
 
   "plugin": [
     "@tarquinen/opencode-dcp@latest",
-    "oh-my-openagent@latest"
+    "oh-my-openagent@latest",
+    "@dietrichgebert/ponytail"
   ],
 
   "provider": {}
