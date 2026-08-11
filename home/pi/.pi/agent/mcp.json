@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "deepwiki": {
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "grep": {
+      "url": "https://mcp.grep.app"
+    },
+    "websearch": {
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa"
+    },
+    "kite": {
+      "type": "remote",
+      "url": "https://mcp.kite.trade/mcp",
+      "enabled": true
+    }
+  }
+}

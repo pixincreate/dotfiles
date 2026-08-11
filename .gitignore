@@ -22,3 +22,8 @@ buffers
 current_preset
 current.conf
 /.omo
+
+# Tmux plugin manager installs (runtime state, never tracked)
+# tpack itself IS tracked as a submodule (provides the tpm shim + binary)
+home/config/.config/tmux/plugins/*
+!home/config/.config/tmux/plugins/tpack

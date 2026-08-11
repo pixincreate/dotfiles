@@ -4,3 +4,6 @@
 [submodule "home/config/.config/alacritty/themes"]
 	path = home/config/.config/alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme.git
+[submodule "home/config/.config/tmux/plugins/tpack"]
+	path = home/config/.config/tmux/plugins/tpack
+	url = https://github.com/tmuxpack/tpack
