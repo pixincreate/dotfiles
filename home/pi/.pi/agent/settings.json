@@ -13,6 +13,7 @@
     "npm:pi-mcp-adapter",
     "npm:pi-subagents",
     "npm:@dietrichgebert/ponytail",
-    "npm:pi-lens"
+    "npm:pi-lens",
+    "npm:pi-clarify"
   ]
 }
