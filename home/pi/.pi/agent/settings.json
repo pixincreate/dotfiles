@@ -7,7 +7,7 @@
     "reserveTokens": 16384,
     "keepRecentTokens": 20000
   },
-  "theme": "dark",
+  "theme": "dark/dark",
   "packages": [
     "npm:pi-web-utils",
     "npm:pi-mcp-adapter",
@@ -15,5 +15,9 @@
     "npm:@dietrichgebert/ponytail",
     "npm:pi-lens",
     "npm:pi-clarify"
-  ]
+  ],
+  "enableInstallTelemetry": false,
+  "terminal": {
+    "showTerminalProgress": true
+  }
 }
