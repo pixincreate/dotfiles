@@ -14,7 +14,8 @@
     "npm:pi-subagents",
     "npm:@dietrichgebert/ponytail",
     "npm:pi-lens",
-    "npm:pi-clarify"
+    "npm:pi-clarify",
+    "npm:@ff-labs/pi-fff"
   ],
   "enableInstallTelemetry": false,
   "terminal": {
