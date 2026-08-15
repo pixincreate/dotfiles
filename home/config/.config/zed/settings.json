@@ -198,10 +198,6 @@
       "default": "allow",
     },
     "default_profile": "ask",
-    "default_model": {
-      "provider": "ollama",
-      "model": "glm-5:cloud",
-    },
     "model_parameters": [],
   },
   // When to automatically save edited buffers. This setting can
