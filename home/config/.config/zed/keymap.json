@@ -15,14 +15,70 @@
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
-      // "j k": "vim::NormalBefore"
+      "j j": "vim::NormalBefore",
+      "j k": "vim::NormalBefore",
+    },
+  },
+  // Normal + visual mode bindings
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "space t i": "editor::ToggleInlayHints",
+      "space u w": "editor::ToggleSoftWrap",
+      "space m p": "markdown::OpenPreview",
+      "space m P": "markdown::OpenPreviewToTheSide",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      // Pane navigation
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      // LSP
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      // Diagnostics
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
+      // Git hunks
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk",
+      // Buffer switching
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      // Toggle project panel (left dock)
+      "space e": "workspace::ToggleLeftDock",
+      // File finder
+      "space space": "file_finder::Toggle",
+    },
+  },
+  // Sneak motion
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "s": ["vim::PushSneak", {}],
+      "S": ["vim::PushSneakBackward", {}],
+    },
+  },
+  // Make `space` a pure leader prefix so which-key pops up
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "space": null,
     },
   },
   {
     "context": "Terminal",
     "bindings": {
       "shift-enter": ["terminal::SendText", "\u001b[13;2u"],
-      "ctrl-s": ["terminal::SendKeystroke", "ctrl-s"]
+      "ctrl-s": ["terminal::SendKeystroke", "ctrl-s"],
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
     }
   }
 ]

@@ -1,15 +1,15 @@
 {
-  // The name of the Zed theme to use for the UI.
-  //
-  // `mode` is one of:
-  // - "system": Use the theme that corresponds to the system's appearance
-  // - "light": Use the theme indicated by the "light" field
-  // - "dark": Use the theme indicated by the "dark" field
   "status_bar": {
     "show_active_file": true
   },
   "proxy": "",
   "theme": {
+    // The name of the Zed theme to use for the UI.
+    //
+    // `mode` is one of:
+    // - "system": Use the theme that corresponds to the system's appearance
+    // - "light": Use the theme indicated by the "light" field
+    // - "dark": Use the theme indicated by the "dark" field
     "mode": "system",
     "light": "Catppuccin Latte",
     "dark": "Catppuccin Mocha",
@@ -47,7 +47,7 @@
   // If `auto_signature_help` is enabled, this setting will be treated as enabled also.
   "show_signature_help_after_edits": true,
   // Hide the values of in variables from visual display in private files
-  "redact_private_values": false,
+  "redact_private_values": true,
   // Globs to match against file paths to determine if a file is private.
   "private_files": [
     "**/.env*",
@@ -94,6 +94,59 @@
     "show": "auto",
   },
   "relative_line_numbers": "wrapped",
+  // Which-key popup for vim leader key
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 500,
+  },
+  // Inline git blame in the buffer
+  "git": {
+    "inline_blame": {
+      "enabled": true,
+    },
+  },
+  "colorize_brackets": true,
+  "code_lens": "on",
+  "toolbar": {
+    "code_actions": true,
+  },
+  // Rainbow indentation
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15,
+  },
+  // Hide build artifacts from project panel and search
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    // above is default from Zed
+    "**/out",
+    "**/dist",
+    "**/.husky",
+    "**/.turbo",
+    "**/.vscode-test",
+    "**/.vscode",
+    "**/.next",
+    "**/.storybook",
+    "**/.tap",
+    "**/.nyc_output",
+    "**/report",
+    "**/node_modules",
+  ],
+  "file_types": {
+    "Dockerfile": ["Dockerfile", "Dockerfile.*"],
+    "JSON": ["json", "jsonc", "*.code-snippets"],
+  },
   // When enabled, automatically adjusts search case sensitivity based on your query.
   // If your search query contains any uppercase letters, the search becomes case-sensitive;
   // if it contains only lowercase letters, the search becomes case-insensitive.
@@ -125,6 +178,15 @@
     "status_style": "label_color",
     "fallback_branch_name": "master",
   },
+  // ACP agent servers (dormant while disable_ai is true)
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+    "pi-acp": {
+      "type": "registry",
+    },
+  },
   "agent": {
     "dock": "right",
     "tool_permissions": {
@@ -155,6 +217,8 @@
     "git_status": true,
     // Whether to show the file icon for a tab.
     "file_icons": true,
+    // Only show errors on tabs
+    "show_diagnostics": "errors",
   },
   // Settings related to preview tabs.
   "preview_tabs": {
@@ -216,6 +280,7 @@
     "show_count_badge": true,
     "env": {
       // "KEY": "value1:value2"
+      "EDITOR": "zed --wait",
     },
 
     "font_family": "JetBrainsMonoNL Nerd Font Propo",
@@ -261,12 +326,12 @@
     "material-icon-theme": true,
     "nix": true,
     "nu": true,
-    "opencode": true,
+    "powershell": true,
     "proto": true,
     "rescript": true,
-    "ruff": true,
     "sql": true,
     "swift": true,
+    "terraform": true,
     "toml": true,
     "verilog": true,
     "xml": true,
@@ -378,6 +443,13 @@
     },
     "Python": {
       "debuggers": ["Debugpy"],
+      "format_on_save": "on",
+      "formatter": {
+        "language_server": {
+          "name": "ruff",
+        },
+      },
+      "language_servers": ["ty", "ruff", "!basedpyright", "!pyrefly", "!pyright", "!pylsp"],
     },
     "Rust": {
       "debuggers": ["CodeLLDB"],
