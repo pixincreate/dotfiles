@@ -15,6 +15,11 @@
       "url": "https://mcp.deepwiki.com/mcp",
       "enabled": true
     },
+    "grafana": {
+      "type": "local",
+      "command": ["grafana-hs-mcp"],
+      "enabled": true
+    },
     "grep": {
       "type": "remote",
       "url": "https://mcp.grep.app",
@@ -38,7 +43,6 @@
 
   "experimental": {
     "policies": [
-      { "effect": "deny", "action": "provider.use", "resource": "anthropic" },
       { "effect": "deny", "action": "provider.use", "resource": "google" },
       { "effect": "deny", "action": "provider.use", "resource": "gemini" },
       { "effect": "deny", "action": "provider.use", "resource": "azure-openai" },
@@ -114,8 +118,8 @@
 
   "plugin": [
     "@tarquinen/opencode-dcp@latest",
-    "oh-my-openagent@latest",
-    "@dietrichgebert/ponytail"
+    "@dietrichgebert/ponytail",
+    "opencode-anthropic-auth@latest"
   ],
 
   "provider": {}
