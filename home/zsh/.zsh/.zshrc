@@ -243,13 +243,46 @@ extract() {
   done
 }
 
-# Automatically do an ls after each cd, z, or zoxide
-z() {
-  if [ -n "$1" ]; then
-    builtin cd "$@" && ls
-  else
-    builtin cd ~ && ls
+# Create an archive from the supplied paths
+compress() {
+  local archive="$1"
+  shift
+  case "$archive" in
+    *.tar.bz2) tar --create --verbose --bzip2 --file "$archive" "$@" ;;
+    *.tar.gz) tar --create --verbose --gzip --file "$archive" "$@" ;;
+    *.tar.xz) tar --create --verbose --xz --file "$archive" "$@" ;;
+    *.tar) tar --create --verbose --file "$archive" "$@" ;;
+    *.zip) zip --recurse-paths "$archive" "$@" ;;
+    *.7z) 7z a "$archive" "$@" ;;
+    *) echo "Unsupported archive extension: $archive" ;;
+  esac
+}
+
+# SSH port forwards
+# fip host [remote_port] [local_port] - forward a remote port to localhost
+fip() {
+  local host="$1"
+  local remote_port="${2:-8080}"
+  local local_port="${3:-$remote_port}"
+  echo "Forwarding localhost:${local_port} -> ${host}:${remote_port} (Ctrl+C to stop)"
+  ssh -N -L "${local_port}:localhost:${remote_port}" "$host"
+}
+
+# lip - list active ssh port forwards
+lip() {
+  ps aux | grep --extended-regexp 'ssh .*-(L|D)' | grep --invert-match grep
+}
+
+# dip <port> <host> - dynamic SOCKS proxy
+dip() {
+  local port="${1:-1080}"
+  local host="${2:-}"
+  if [[ -z "$host" ]]; then
+    echo "Usage: dip <port> <host>"
+    return 1
   fi
+  echo "SOCKS proxy on localhost:${port} (Ctrl+C to stop)"
+  ssh -N -D "${port}" "$host"
 }
 
 # Returns the last 2 fields of the working directory
@@ -372,5 +405,5 @@ eval "$(atuin init zsh)"
 # Load Starship and transient prompt
 [[ -f ~/.zsh/.starship.sh ]] && source ~/.zsh/.starship.sh
 
-# Load application aliases
-[[ -f ~/.zsh/.additionals.zsh ]] && source ~/.zsh/.additionals.zsh
+# Load local platform/machine-specific configuration
+[[ -f ~/.zsh/local.zsh ]] && source ~/.zsh/local.zsh
