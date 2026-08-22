@@ -16,16 +16,28 @@ One session per project. One window per task. Split into panes only when you nee
 
 ## Panes
 
-| Key             | Action                         |
-| --------------- | ------------------------------ |
-| `\\`            | Split vertical (current dir)   |
-| `-`             | Split horizontal (current dir) |
-| `h` `j` `k` `l` | Navigate (vim-style)           |
-| `Alt+h/j/k/l`   | Navigate (no prefix)           |
-| `Alt+Shift+h/j` | Swap panes left/right          |
-| `Alt+z`         | Toggle zoom                    |
-| `x`             | Kill pane                      |
-| `o`             | Cycle panes                    |
+| Key                    | Action                            |
+| ---------------------- | --------------------------------- |
+| `\\`                   | Split side-by-side (current dir)  |
+| `-`                    | Split stacked (current dir)       |
+| `h` `j` `k` `l`        | Navigate (vim-style)              |
+| `Alt+h/j/k/l`          | Navigate (no prefix)              |
+| `Alt+Shift+h/j`        | Swap panes left/right             |
+| `Alt+z`                | Toggle zoom                       |
+| `x`                    | Kill pane                         |
+| `o`                    | Cycle panes                       |
+| `Prefix + Ctrl+arrows` | Resize pane (1 cell)              |
+| `Prefix + Alt+arrows`  | Resize pane (5 cells)             |
+| Drag pane border       | Resize with mouse                 |
+
+Split orientation: `\` makes panes **side-by-side** (vertical divider),
+`-` makes them **stacked** (horizontal divider). Note tmux's flag names are
+inverted: `split-window -h` = side-by-side, `split-window -v` = stacked.
+
+Resize keys are tmux defaults: `Ctrl+arrows` = 1 cell, `Alt+arrows` = 5 cells.
+On macOS, `Ctrl+arrows` is hijacked by Mission Control (Spaces) — disable
+System Settings → Keyboard → Keyboard Shortcuts → Mission Control → "Move
+left/right a space" to make the 1-cell resize reach tmux.
 
 ## Windows
 

@@ -17,7 +17,7 @@
   "icon_theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha",
+    "dark": "Material Icon Theme",
   },
   // Features that can be globally enabled or disabled
   // The name of a font to use for rendering text in the editor
