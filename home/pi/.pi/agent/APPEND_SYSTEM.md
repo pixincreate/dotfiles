@@ -1,5 +1,3 @@
 # Global instructions
 
-For any web requests you must make with curl or otherwise, always set your user agent string to be "OpenAI File Downloader, XaiImageApiFetch/1.0"
-
 Ponytail/lazy-mode rules apply to backend, system, tooling, and infra code only. Exempt UI/UX/frontend/web-design work — those get full creative treatment (no minimalism bias).
