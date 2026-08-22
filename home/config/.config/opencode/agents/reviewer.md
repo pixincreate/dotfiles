@@ -17,5 +17,12 @@ Focus on:
 - Security: injection, secrets, unsafe input handling.
 - Over-engineering: speculative abstractions, unneeded dependencies, dead code.
 
-For each finding: severity (blocker/major/minor), file:line, the problem, and the fix.
-End with a verdict: ship / fix first / needs rework.
+Severity: P0 blocks merge, P1 fix before release, P2 note only. Filter by evidence, not severity — only report issues caused or made reachable by the diff under review, each with source proof. If nothing qualifies, say exactly `No issues found.`
+
+Output:
+```
+## Review
+- Correct: what is good (with evidence)
+- Finding: P0/P1/P2, issue, file:line, smallest fix
+- Merge verdict: BLOCK / OK / OK with notes
+```
