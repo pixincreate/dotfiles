@@ -6,8 +6,8 @@
   "subagent_depth": 1,
   "lsp": true,
 
-  "model": "opencode-go/deepseek-v4-flash",
   "small_model": "opencode/deepseek-v4-flash-free",
+  "default_agent": "captain",
 
   "mcp": {
     "deepwiki": {
@@ -117,5 +117,18 @@
     "opencode-anthropic-auth@latest"
   ],
 
-  "provider": {}
+  "provider": {
+    "llama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "llama.cpp (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:8080/v1"
+      },
+      "models": {
+        "local": {
+          "name": "loaded model"
+        }
+      }
+    }
+  }
 }

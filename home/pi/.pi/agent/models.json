@@ -1,0 +1,16 @@
+{
+  "providers": {
+    "llama": {
+      "baseUrl": "http://127.0.0.1:8080/v1",
+      "api": "openai-completions",
+      "apiKey": "llama-local",
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": false
+      },
+      "models": [
+        { "id": "local", "name": "llama.cpp (whatever rig llama serve loaded)" }
+      ]
+    }
+  }
+}
