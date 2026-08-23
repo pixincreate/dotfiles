@@ -16,6 +16,19 @@
       "type": "remote",
       "url": "https://mcp.kite.trade/mcp",
       "enabled": true
+    },
+    "codegraph": {
+      "command": "npx",
+      "args": ["-y", "@colbymchenry/codegraph", "serve", "--mcp"]
+    },
+    "lsp": {
+      "command": "agent-lsp",
+      "args": [
+        "go:gopls",
+        "typescript:typescript-language-server,--stdio",
+        "python:pyright-langserver,--stdio",
+        "rust:rust-analyzer"
+      ]
     }
   }
 }

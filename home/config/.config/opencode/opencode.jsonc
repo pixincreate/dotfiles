@@ -24,6 +24,21 @@
       "type": "remote",
       "url": "https://mcp.kite.trade/mcp",
       "enabled": true
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    },
+    "websearch": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
+      "enabled": true
+    },
+    "codegraph": {
+      "type": "local",
+      "command": ["npx", "-y", "@colbymchenry/codegraph", "serve", "--mcp"],
+      "enabled": true
     }
   },
 
