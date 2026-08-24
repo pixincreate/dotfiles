@@ -26,12 +26,14 @@
 - Use semantic line breaks in Markdown prose: put each complete sentence on its own source line and let the renderer wrap it.
 - Do not hard-wrap Markdown prose at a fixed column or split a phrase only to meet a line-length limit.
 - Prefer small, focused changes over broad refactors unless the user asks otherwise.
+- Do not chain many commands into one shell line just to finish a task in a single run.
+  The sandbox parser rejects commands that are too complex, so split exploration into short simple commands and run them one at a time.
 - After code changes, run the project's existing tests, linter, or typecheck when those commands are defined.
   If none exist, do a minimal manual check of the changed behavior.
-- Do not use LaTeX math syntax, math mode, dollar-sign delimiters (`$...$`, `$$...$$`), or LaTeX escape sequences (such as `\rightarrow`, `\Rightarrow`, `\times`, `\pm`, `\circ`, `\approx`) in direct terminal output or conversational responses.
+- Do not use LaTeX math syntax, math mode, dollar-sign delimiters (`$...$`, `$$...$$`), or LaTeX escape sequences (such as `\rightarrow`, `\Rightarrow`, `\times`, `\pm`, `\circ`, `\approx`, etc.) in direct terminal output or conversational responses.
   Standard TUI environments do not render LaTeX math markup in terminal output.
   Use standard Unicode characters (e.g., `→`, `⇒`, `×`, `±`, `°`, `≈`) or plain text for terminal output.
-  Rich Markdown and LaTeX math syntax are permitted only in committed Markdown files or documentation.
+  In Markdown files, documentation, or other artifacts processed outside the terminal UI, rich Markdown and LaTeX math syntax are permitted.
 
 ## Testing
 
@@ -60,15 +62,6 @@
   Do not add a competing helper or dependency.
   Ask before adding a new dependency.
 - YAGNI never justifies omitting required validation, error handling, security, accessibility, compatibility, tests, or refactoring that keeps the codebase safe and easy to change.
-- Ponytail/lazy-mode rules apply to backend, system, tooling, and infra code only. Exempt UI/UX/frontend/web-design work — those get full creative treatment (no minimalism bias).
-
-## Worktrees
-
-- When the user asks you to create a worktree and implement or review work in it, create the worktree first, then move the current session to it with the OpenCode session API.
-- Move the session only after worktree creation succeeds.
-- Verify the session location after moving it.
-- Do not move the session when the user only asks you to create a worktree.
-- Report the worktree path.
 
 ## Subagent Routing
 
@@ -89,34 +82,29 @@
 
 ## Tooling Preferences
 
+- For web searches and technical research, always use `websearch_cited` to fetch grounded, up-to-date information with inline citations.
 - For Python projects, always use `uv` for running tools, managing dependencies, and virtual environments unless the repository explicitly requires a different workflow.
 - For GitHub repositories, issues, pull requests, releases, and file browsing, try `gh` CLI first for small or short lookups.
 - For repositories hosted on GitHub or any other Git hosting service, clone the repository locally with `git` and use local searches and file reads.
   If `gh` fails, clone locally instead of switching to `webfetch`.
   For large repositories or exploration that requires many requests, clone locally from the start instead of repeatedly using `gh`.
-  Use a directory under `/tmp/opencode`, prefer a shallow clone when full history is not needed, and perform searches and file reads locally.
+  Use a directory under `/tmp/pi`, prefer a shallow clone when full history is not needed, and perform searches and file reads locally.
   If cloning fails, fall back to `webfetch`.
   Delete the temporary clone when the task ends, including after an unsuccessful task.
 - Prefer `rg` over `grep` or `find` for shell-based searches.
   Prefer native file-search and content-search tools when they are available.
 - Prefer `7z` for listing, testing, and extracting archives.
   Do not use `unzip` or `tar` when `7z` supports the archive format; use another tool only when `7z` is unavailable or incompatible, and state why.
-- When running grilling workflows (`grill-me`, `grill-with-docs`, `grilling`) or presenting decision frontiers, use the `question` tool instead of plain text.
-  - Present each frontier question as an entry in the `questions` array.
-  - Provide structured options for each choice when possible.
-  - Place your recommended option first with `(Recommended)` appended to the label.
-  - Set `multiple: true` when multiple choices apply.
-- You may use `/tmp/opencode` for temporary work outside the workspace.
+- You may use `/tmp/pi` for temporary work outside the workspace; the bwrap-sandbox extension creates this scratch directory.
   Always delete temporary files and directories you create when the task ends.
-  WSL does not use tmpfs, so leftover files in `/tmp` persist on disk.
-- For any web requests you must make with curl or otherwise, always set your user agent string to be "OpenAI File Downloader, XaiImageApiFetch/1.0"
+  WSL does not use tmpfs, so leftover files in `/tmp/pi` persist on disk.
 
 ## Provider Quota Handling
 
-- OpenCode injects the current date into the prompt.
-  Treat the OpenAI daily quota as refreshed when that date changes.
-- It is fine if a new session discovers exhaustion only after an OpenAI HTTP 429 or daily quota error.
-- While the OpenAI quota is exhausted for the current date, do not use `coder-high`.
+- Pi does not inject the current date into the prompt.
+  Assume the OpenAI provider is available at session start.
+  If an OpenAI call fails with a quota exhaustion error, remember it and treat the quota as exhausted for the rest of the session.
+- While the OpenAI quota is exhausted, do not use `coder-high`.
   Use `coder-low` for all implementation work.
 - If the user explicitly requested `coder-high` and it is unavailable because the OpenAI quota is exhausted, stop the task and report that to the user.
   Do not silently fall back to another coder tier for that request.
@@ -125,11 +113,6 @@
 
 - Never create commits unless the user explicitly asks for them.
 - When the user requests per-task commits, commit each discrete task before starting the next one.
-- Never stage with `git add .` or `git add -A`. Name the files explicitly instead.
-- Before committing, scan the staged files for secrets with key-watch:
-  `key-watch scan $(git diff --cached --name-only)`
-  If it reports findings, stop and report them to the user instead of committing.
-- Never bypass git hooks with `--no-verify`.
 - Before every commit, run the exact full commands `git status`, `git diff`, and `git log -10`.
 - Do not replace these required inspections with abbreviated variants such as `git status --short`, `git diff --stat`, or `git log --oneline`.
 - Read the full commit messages from `git log -10`, including their bodies and trailers.
@@ -148,3 +131,5 @@
   If both are set, sign every commit with the configured method and use `git commit --signoff`.
 - Do not amend commits, push, or rewrite history unless the user explicitly asks.
   When the user explicitly asks, perform the requested operation and do not refuse solely because it amends commits, pushes, or rewrites history.
+- Keep `.pi/` in `.gitignore`: it stores Pi runtime state such as the sandbox audit log (`.pi/sandbox-audit.jsonl`) and policy files.
+  Never stage or commit files from `.pi/`.
