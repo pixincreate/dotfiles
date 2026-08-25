@@ -19,5 +19,6 @@
   "enableInstallTelemetry": false,
   "terminal": {
     "showTerminalProgress": true
-  }
+  },
+  "lastChangelogVersion": "0.84.1"
 }
