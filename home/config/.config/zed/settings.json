@@ -181,14 +181,15 @@
   // ACP agent servers (dormant while disable_ai is true)
   "agent_servers": {
     "opencode": {
-      "type": "registry",
+      "type": "registry"
     },
-    "pi-acp": {
-      "type": "registry",
+    "claude-acp": {
+      "type": "registry"
     },
   },
   "agent": {
     "dock": "right",
+    "single_file_review": true,
     "tool_permissions": {
       "default": "allow",
     },
@@ -255,7 +256,7 @@
   // Whether to disable all AI features in Zed.
   //
   // Default: false
-  "disable_ai": true,
+  "disable_ai": false,
   "edit_predictions": {
     "allow_data_collection": "no",
     "provider": "copilot",
