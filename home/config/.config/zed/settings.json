@@ -184,6 +184,10 @@
       "type": "registry"
     },
     "claude-acp": {
+      "default_config_options": {
+        "effort": "max",
+        "mode": "auto"
+      },
       "type": "registry"
     },
   },

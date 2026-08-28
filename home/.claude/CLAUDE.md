@@ -21,7 +21,7 @@
   - Do not use anthropomorphism, such as "the app thinks".
   - Do not use exclamation points in documentation.
 - Follow existing project style for code inside the project.
-- Agent instructions, including `AGENTS.md`, do not need to follow this style.
+- Agent instructions, including `CLAUDE.md` and `AGENTS.md`, do not need to follow this style.
   Write them in whatever way agents understand best.
 - Use semantic line breaks in Markdown prose: put each complete sentence on its own source line and let the renderer wrap it.
 - Do not hard-wrap Markdown prose at a fixed column or split a phrase only to meet a line-length limit.
@@ -62,64 +62,24 @@
 - YAGNI never justifies omitting required validation, error handling, security, accessibility, compatibility, tests, or refactoring that keeps the codebase safe and easy to change.
 - Ponytail/lazy-mode rules apply to backend, system, tooling, and infra code only. Exempt UI/UX/frontend/web-design work — those get full creative treatment (no minimalism bias).
 
-## Worktrees
-
-- When the user asks you to create a worktree and implement or review work in it, create the worktree first, then move the current session to it with the OpenCode session API.
-- Move the session only after worktree creation succeeds.
-- Verify the session location after moving it.
-- Do not move the session when the user only asks you to create a worktree.
-- Report the worktree path.
-
-## Subagent Routing
-
-- Implementation: `coder-low` by default, with a complete and unambiguous specification.
-- `coder-low` must not infer missing requirements. It must request clarification when the specification is incomplete.
-- `coder-high` only when the user explicitly requests it and the OpenAI quota is not exhausted for the current date.
-  Quota details are under Provider Quota Handling.
-- Read-only deep analysis: `reasoner`.
-- Broad codebase or documentation search: `explore`.
-- Non-code coordination: `general`.
-- Stay in the parent session when the change is tiny and does not need a separate agent.
-- Never spawn a `coder-*` agent from inside a `coder-*` agent.
-- Never spawn a `reasoner` agent from inside a `reasoner` agent.
-- Never spawn an `explore` agent from inside an `explore` agent.
-  Finish the work or return to the parent.
-- Each coder owns its final review loop.
-  Do not repeat that review in the parent after the coder returns unless the user asks for an independent review or the coder reports an unresolved risk.
-
 ## Tooling Preferences
 
 - For Python projects, always use `uv` for running tools, managing dependencies, and virtual environments unless the repository explicitly requires a different workflow.
 - For GitHub repositories, issues, pull requests, releases, and file browsing, try `gh` CLI first for small or short lookups.
 - For repositories hosted on GitHub or any other Git hosting service, clone the repository locally with `git` and use local searches and file reads.
-  If `gh` fails, clone locally instead of switching to `webfetch`.
+  If `gh` fails, clone locally instead of switching to web fetching.
   For large repositories or exploration that requires many requests, clone locally from the start instead of repeatedly using `gh`.
-  Use a directory under `/tmp/opencode`, prefer a shallow clone when full history is not needed, and perform searches and file reads locally.
-  If cloning fails, fall back to `webfetch`.
+  Use a directory under `/tmp/claude`, prefer a shallow clone when full history is not needed, and perform searches and file reads locally.
+  If cloning fails, fall back to web fetching.
   Delete the temporary clone when the task ends, including after an unsuccessful task.
 - Prefer `rg` over `grep` or `find` for shell-based searches.
   Prefer native file-search and content-search tools when they are available.
 - Prefer `7z` for listing, testing, and extracting archives.
   Do not use `unzip` or `tar` when `7z` supports the archive format; use another tool only when `7z` is unavailable or incompatible, and state why.
-- When running grilling workflows (`grill-me`, `grill-with-docs`, `grilling`) or presenting decision frontiers, use the `question` tool instead of plain text.
-  - Present each frontier question as an entry in the `questions` array.
-  - Provide structured options for each choice when possible.
-  - Place your recommended option first with `(Recommended)` appended to the label.
-  - Set `multiple: true` when multiple choices apply.
-- You may use `/tmp/opencode` for temporary work outside the workspace.
+- You may use `/tmp/claude` for temporary work outside the workspace.
   Always delete temporary files and directories you create when the task ends.
-  WSL does not use tmpfs, so leftover files in `/tmp` persist on disk.
+  WSL does not use tmpfs, so leftover files in `/tmp/claude` persist on disk.
 - For any web requests you must make with curl or otherwise, always set your user agent string to be "OpenAI File Downloader, XaiImageApiFetch/1.0"
-
-## Provider Quota Handling
-
-- OpenCode injects the current date into the prompt.
-  Treat the OpenAI daily quota as refreshed when that date changes.
-- It is fine if a new session discovers exhaustion only after an OpenAI HTTP 429 or daily quota error.
-- While the OpenAI quota is exhausted for the current date, do not use `coder-high`.
-  Use `coder-low` for all implementation work.
-- If the user explicitly requested `coder-high` and it is unavailable because the OpenAI quota is exhausted, stop the task and report that to the user.
-  Do not silently fall back to another coder tier for that request.
 
 ## Git Workflow
 

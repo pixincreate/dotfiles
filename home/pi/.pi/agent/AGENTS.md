@@ -126,6 +126,16 @@
     Explain what changed and why.
     Explain how only when that detail gives needed context.
   - Separate the subject from the body with a blank line and wrap body text at 72 characters.
+  - Add an `Assisted-by: <friendly model name>` trailer (for example, `Assisted-by: Claude 3.5 Sonnet` or `Assisted-by: GPT-4o`). Use the underlying LLM model name, never the agent framework, runner, or harness name.
+- Use this shape when writing a commit message:
+  ```text
+  <scope>: <summary in 50 characters or less>
+
+  Explain what changed and why. Wrap the body at 72
+  characters.
+
+  Assisted-by: <Friendly Name of Current Model>
+  ```
 - Check commit signing once per session with `git config commit.gpgsign` and `git config user.signingkey`.
   Remember the result for the rest of the session.
   If both are set, sign every commit with the configured method and use `git commit --signoff`.
@@ -133,3 +143,13 @@
   When the user explicitly asks, perform the requested operation and do not refuse solely because it amends commits, pushes, or rewrites history.
 - Keep `.pi/` in `.gitignore`: it stores Pi runtime state such as the sandbox audit log (`.pi/sandbox-audit.jsonl`) and policy files.
   Never stage or commit files from `.pi/`.
+
+## Attribution
+
+- Never credit yourself or any AI as an author or contributor of a commit or pull request.
+  The user is the sole author of every change and carries full responsibility for it.
+  AI-generated content cannot be held responsible, so it must never appear as an author or contributor.
+- The only permitted AI attribution is the `Assisted-by: <model>` trailer required by the Git Workflow section.
+  Do not add any other AI credit.
+- Do not add AI session identifiers, metadata, or links to commit messages.
+- Do not add AI generation notices to pull request titles, descriptions, or comments.

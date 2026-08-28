@@ -9,5 +9,5 @@
     "enabled": true,
   },
   "diff_style": "auto",
-  "plugin": [["{env:SESH_TUI_PLUGIN}", { "limit": 50 }]],
+  "plugin": [["{env:OPENCODE_SESH_PLUGIN}", { "limit": 50 }], "{env:OPENCODE_MOUTH_PLUGIN}"],
 }
