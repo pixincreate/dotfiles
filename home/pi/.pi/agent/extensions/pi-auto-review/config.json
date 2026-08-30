@@ -1,0 +1,5 @@
+{
+  "model": "opencode-go/deepseek-v4-flash",
+  "failureMode": "defer",
+  "timeoutMs": 90000
+}

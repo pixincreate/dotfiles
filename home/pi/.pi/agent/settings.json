@@ -7,19 +7,19 @@
     "reserveTokens": 16384,
     "keepRecentTokens": 20000
   },
-  "theme": "dark/dark",
+  "theme": "dark",
   "packages": [
-    "npm:pi-web-utils",
-    "npm:pi-mcp-adapter",
-    "npm:pi-subagents",
-    "npm:@dietrichgebert/ponytail",
-    "npm:pi-lens",
     "npm:pi-clarify",
-    "npm:@ff-labs/pi-fff"
+    "npm:pi-context-view",
+    "npm:pi-lens",
+    "npm:pi-mcp-adapter",
+    "npm:pi-web-access",
+    "npm:@dietrichgebert/ponytail",
+    "npm:@erichll/pi-auto-review",
+    "npm:@erichll/pi-sandbox",
+    "npm:@ff-labs/pi-fff",
+    "npm:@gotgenes/pi-permission-system"
   ],
   "enableInstallTelemetry": false,
-  "terminal": {
-    "showTerminalProgress": true
-  },
   "lastChangelogVersion": "0.84.1"
 }
