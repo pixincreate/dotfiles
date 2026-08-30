@@ -2,12 +2,15 @@
   "$schema": "https://opencode.ai/tui.json",
   "theme": "system",
   "keybinds": {
-    "leader": "ctrl+x",
+    "leader": "ctrl+x"
   },
   "scroll_speed": 3,
   "scroll_acceleration": {
-    "enabled": true,
+    "enabled": true
   },
   "diff_style": "auto",
-  "plugin": [["{env:OPENCODE_SESH_PLUGIN}", { "limit": 50 }], "{env:OPENCODE_MOUTH_PLUGIN}"],
+  "plugin": [
+    ["{env:OPENCODE_SESH_PLUGIN}", { "limit": 50 }],
+    "{env:OPENCODE_MOUTH_PLUGIN}"
+  ]
 }
