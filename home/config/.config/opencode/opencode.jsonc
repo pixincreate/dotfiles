@@ -48,7 +48,9 @@
     "openai",
     "github-copilot",
     "ollama-cloud",
-    "nvidia"
+    "nvidia",
+    "llama.cpp",
+    "zhipuai"
   ],
 
   "experimental": {

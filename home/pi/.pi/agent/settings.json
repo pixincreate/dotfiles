@@ -18,7 +18,9 @@
     "npm:@erichll/pi-auto-review",
     "npm:@erichll/pi-sandbox",
     "npm:@ff-labs/pi-fff",
-    "npm:@gotgenes/pi-permission-system"
+    "npm:@gotgenes/pi-permission-system",
+    "npm:pi-clarify",
+    "npm:pi-undo-redo"
   ],
   "enableInstallTelemetry": false,
   "lastChangelogVersion": "0.84.1"
