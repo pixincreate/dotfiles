@@ -39,6 +39,11 @@
       "type": "local",
       "command": ["npx", "-y", "@colbymchenry/codegraph", "serve", "--mcp"],
       "enabled": true
+    },
+    "firecrawl": {
+      "type": "remote",
+      "url": "https://mcp.firecrawl.dev/v2/mcp",
+      "enabled": true
     }
   },
 
@@ -57,9 +62,21 @@
     "policies": [
       { "effect": "deny", "action": "provider.use", "resource": "google" },
       { "effect": "deny", "action": "provider.use", "resource": "gemini" },
-      { "effect": "deny", "action": "provider.use", "resource": "azure-openai" },
-      { "effect": "deny", "action": "provider.use", "resource": "amazon-bedrock" },
-      { "effect": "deny", "action": "provider.use", "resource": "google-vertex" },
+      {
+        "effect": "deny",
+        "action": "provider.use",
+        "resource": "azure-openai"
+      },
+      {
+        "effect": "deny",
+        "action": "provider.use",
+        "resource": "amazon-bedrock"
+      },
+      {
+        "effect": "deny",
+        "action": "provider.use",
+        "resource": "google-vertex"
+      },
       { "effect": "deny", "action": "provider.use", "resource": "openrouter" }
     ]
   },
@@ -130,7 +147,6 @@
 
   "plugin": [
     "@tarquinen/opencode-dcp@latest",
-    "@dietrichgebert/ponytail",
     "opencode-anthropic-auth@latest"
   ],
 
