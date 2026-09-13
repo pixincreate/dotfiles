@@ -7,7 +7,14 @@ command_exists() {
 
 # Auto-start tmux in all terminals unless explicitly opted out
 __start_tmux() {
-  if [ -n "$TMUX" ] || [ -n "$NO_TMUX" ] || ! command -v tmux &> /dev/null; then
+  if [ -n "$NO_TMUX" ] || ! command -v tmux &> /dev/null; then
+    return 0
+  fi
+
+  # A GUI app launched from a tmux pane (Zed, VS Code) inherits $TMUX and hands
+  # it to every terminal it spawns. Treat $TMUX as real only when this shell is
+  # the pane itself, i.e. its tty is the pane's tty. A leaked value never matches.
+  if [ -n "$TMUX" ] && [ "$(tmux display-message -p '#{pane_tty}' 2>/dev/null)" = "$(tty 2>/dev/null)" ]; then
     return 0
   fi
 
