@@ -2,66 +2,117 @@
   "$schema": "https://opencode.ai/config.json",
 
   "share": "disabled",
-  "autoupdate": false,
-  "subagent_depth": 1,
+  "update": "disable",
   "lsp": true,
-
-  "small_model": "opencode/deepseek-v4-flash-free",
   "default_agent": "captain",
-
-  "mcp": {
-    "deepwiki": {
-      "type": "remote",
-      "url": "https://mcp.deepwiki.com/mcp",
-      "enabled": true
-    },
-    "grep": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true
-    },
-    "kite": {
-      "type": "remote",
-      "url": "https://mcp.kite.trade/mcp",
-      "enabled": true
-    },
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "enabled": true
-    },
-    "websearch": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
-      "enabled": true
-    },
-    "codegraph": {
-      "type": "local",
-      "command": ["npx", "-y", "@colbymchenry/codegraph", "serve", "--mcp"],
-      "enabled": true
-    },
-    "firecrawl": {
-      "type": "remote",
-      "url": "https://mcp.firecrawl.dev/v2/mcp",
-      "enabled": true
+  "agents": {
+    "title": {
+      "model": "opencode/deepseek-v4-flash-free"
     }
   },
-
-  "enabled_providers": [
-    "opencode-go",
-    "opencode",
-    "openai",
-    "github-copilot",
-    "ollama-cloud",
-    "nvidia",
-    "llama.cpp",
-    "zhipuai"
-  ],
-
+  "mcp": {
+    "servers": {
+      "deepwiki": {
+        "type": "remote",
+        "url": "https://mcp.deepwiki.com/mcp",
+        "disabled": false
+      },
+      "grep": {
+        "type": "remote",
+        "url": "https://mcp.grep.app",
+        "disabled": false
+      },
+      "kite": {
+        "type": "remote",
+        "url": "https://mcp.kite.trade/mcp",
+        "disabled": false
+      },
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+        "disabled": false
+      },
+      "websearch": {
+        "type": "remote",
+        "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
+        "disabled": false
+      },
+      "codegraph": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@colbymchenry/codegraph",
+          "serve",
+          "--mcp"
+        ],
+        "disabled": false
+      },
+      "firecrawl": {
+        "type": "remote",
+        "url": "https://mcp.firecrawl.dev/v2/mcp",
+        "disabled": false
+      }
+    }
+  },
   "experimental": {
+    "subagent_depth": 1,
     "policies": [
-      { "effect": "deny", "action": "provider.use", "resource": "google" },
-      { "effect": "deny", "action": "provider.use", "resource": "gemini" },
+      {
+        "effect": "deny",
+        "action": "provider.use",
+        "resource": "*"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "opencode-go"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "opencode"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "openai"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "github-copilot"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "ollama-cloud"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "nvidia"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "llama.cpp"
+      },
+      {
+        "effect": "allow",
+        "action": "provider.use",
+        "resource": "zhipuai"
+      },
+      {
+        "effect": "deny",
+        "action": "provider.use",
+        "resource": "google"
+      },
+      {
+        "effect": "deny",
+        "action": "provider.use",
+        "resource": "gemini"
+      },
       {
         "effect": "deny",
         "action": "provider.use",
@@ -77,84 +128,255 @@
         "action": "provider.use",
         "resource": "google-vertex"
       },
-      { "effect": "deny", "action": "provider.use", "resource": "openrouter" }
+      {
+        "effect": "deny",
+        "action": "provider.use",
+        "resource": "openrouter"
+      }
     ]
   },
-
-  "permission": {
-    "*": "allow",
-
-    "bash": {
-      "*": "allow",
-
-      // Destructive commands - always deny
-      "rm -rf *": "deny",
-      "rm -rf /": "deny",
-      "sudo *": "deny",
-      "su *": "deny",
-      "chown -R *": "deny",
-      "chmod -R 777 *": "deny",
-      "chmod 777 *": "deny",
-      "mkfs*": "deny",
-      "dd *": "deny",
-
-      // Credential access - always deny
-      "cat ~/.ssh/*": "deny",
-      "cat ~/.aws/*": "deny",
-      "cat ~/.env*": "deny",
-      "cat ~/.npmrc*": "deny",
-      "cat ~/.netrc*": "deny",
-      "cat ~/.pki/*": "deny",
-      "cat ~/.kube/*": "deny",
-      "less ~/.ssh/*": "deny",
-      "head ~/.ssh/*": "deny",
-
-      // Build/compile - ask (could be slow)
-      "cargo build*": "ask",
-      "cargo test*": "ask",
-      "make *": "ask",
-      "npm *": "ask",
-      "yarn *": "ask",
-      "pnpm *": "ask",
-      "bun *": "ask",
-      "pip *": "ask",
-      "uv *": "ask",
-
-      // Package install - ask (mutates system)
-      "brew *": "ask",
-      "cargo install*": "ask",
-      "npm install*": "ask",
-      "pip install*": "ask"
+  "permissions": [
+    {
+      "action": "*",
+      "resource": "*",
+      "effect": "allow"
     },
-
-    // File operations - ask before mutating
-    "edit": "ask",
-    "write": "ask",
-    "external_directory": "ask",
-    "webfetch": "allow",
-    "websearch": "allow",
-    "task": "allow",
-    "doom_loop": "deny",
-    "skill": "allow",
-    "question": "allow",
-    "todowrite": "allow",
-    "glob": "allow",
-    "grep": "allow",
-    "list": "allow",
-    "lsp": "allow",
-    "read": "allow"
-  },
-
-  "plugin": [
-    "@tarquinen/opencode-dcp@latest",
-    "opencode-anthropic-auth@latest"
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "rm -rf *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "rm -rf /",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "sudo *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "su *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "chown -R *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "chmod -R 777 *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "chmod 777 *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "mkfs*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "dd *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cat ~/.ssh/*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cat ~/.aws/*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cat ~/.env*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cat ~/.npmrc*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cat ~/.netrc*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cat ~/.pki/*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cat ~/.kube/*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "less ~/.ssh/*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "head ~/.ssh/*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo build*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo test*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "make *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "npm *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "yarn *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "pnpm *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "bun *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "pip *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "uv *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "brew *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo install*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "npm install*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "pip install*",
+      "effect": "ask"
+    },
+    {
+      "action": "edit",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "edit",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "external_directory",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "webfetch",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "websearch",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "subagent",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "skill",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "question",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "todowrite",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "glob",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "grep",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "list",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "read",
+      "resource": "*",
+      "effect": "allow"
+    }
   ],
-
-  "provider": {
+  "plugins": [
+    {
+      "package": "@tarquinen/opencode-dcp@latest"
+    }
+  ],
+  "providers": {
     "llama": {
-      "npm": "@ai-sdk/openai-compatible",
+      "package": "@ai-sdk/openai-compatible",
       "name": "llama.cpp (local)",
-      "options": {
+      "settings": {
         "baseURL": "http://127.0.0.1:8080/v1"
       },
       "models": {

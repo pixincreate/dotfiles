@@ -1,10 +1,16 @@
 ---
 description: "Plans work before implementation. Read-only."
 mode: subagent
-permission:
-  edit: deny
-  bash: deny
-  webfetch: allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: allow
 ---
 
 You produce plans, never edits.

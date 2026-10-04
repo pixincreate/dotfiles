@@ -1,11 +1,19 @@
 ---
 description: "Reviews code: correctness, security, over-engineering. Read-only."
 mode: subagent
-permission:
-  edit: deny
-  bash: deny
-  skill: allow
-  webfetch: allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "*"
+    effect: allow
+  - action: webfetch
+    resource: "*"
+    effect: allow
 ---
 
 You review code, you never write it.
