@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "grafana": {
+        "type": "local",
+        "command": [
+          "grafana-hs-mcp"
+        ],
+        "disabled": false
+      }
+    }
+  }
+}
