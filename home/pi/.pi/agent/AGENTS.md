@@ -3,12 +3,20 @@
 ## Working Style
 
 - Keep responses concise, direct, and technical.
-- Use this writing style for all human-facing text:
-  documentation, commit messages, comments, user interfaces, and responses.
+- Use ASD-STE100 Simplified Technical English for all human-facing text:
+  documentation, commit messages, comments, user interfaces, explanations, and responses.
+  - Use complete, grammatical sentences.
+    Do not omit necessary words or use sentence fragments to reduce response length.
+  - Use simple words with clear meanings.
+    Use the same term for the same concept throughout an explanation.
+  - Keep technical names, code identifiers, commands, paths, and quoted text exact.
   - Write for the reader and give direct instructions.
     Address readers as "you" in documentation, user interfaces, and responses.
   - Use active voice and present tense.
-  - Keep sentences short, with one idea per sentence (ASD-STE100).
+  - Keep sentences short, with one idea per sentence.
+    Use no more than 20 words for an instruction and 25 words for a descriptive sentence.
+  - Explain the result, the reason, and the required action when they are relevant.
+    Do not remove information that the reader needs to understand or use the answer.
   - Keep paragraphs short and use sentence-case headings.
   - Be concise and use inclusive language.
   - Use examples when they improve clarity.
