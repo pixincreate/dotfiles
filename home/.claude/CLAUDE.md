@@ -3,12 +3,20 @@
 ## Working Style
 
 - Keep responses concise, direct, and technical.
-- Use this writing style for all human-facing text:
-  documentation, commit messages, comments, user interfaces, and responses.
+- Use ASD-STE100 Simplified Technical English for all human-facing text:
+  documentation, commit messages, comments, user interfaces, explanations, and responses.
+  - Use complete, grammatical sentences.
+    Do not omit necessary words or use sentence fragments to reduce response length.
+  - Use simple words with clear meanings.
+    Use the same term for the same concept throughout an explanation.
+  - Keep technical names, code identifiers, commands, paths, and quoted text exact.
   - Write for the reader and give direct instructions.
     Address readers as "you" in documentation, user interfaces, and responses.
   - Use active voice and present tense.
-  - Keep sentences short, with one idea per sentence (ASD-STE100).
+  - Keep sentences short, with one idea per sentence.
+    Use no more than 20 words for an instruction and 25 words for a descriptive sentence.
+  - Explain the result, the reason, and the required action when they are relevant.
+    Do not remove information that the reader needs to understand or use the answer.
   - Keep paragraphs short and use sentence-case headings.
   - Be concise and use inclusive language.
   - Use examples when they improve clarity.
@@ -60,7 +68,6 @@
   Do not add a competing helper or dependency.
   Ask before adding a new dependency.
 - YAGNI never justifies omitting required validation, error handling, security, accessibility, compatibility, tests, or refactoring that keeps the codebase safe and easy to change.
-- Ponytail/lazy-mode rules apply to backend, system, tooling, and infra code only. Exempt UI/UX/frontend/web-design work — those get full creative treatment (no minimalism bias).
 
 ## Tooling Preferences
 
