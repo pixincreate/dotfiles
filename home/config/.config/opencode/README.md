@@ -48,8 +48,8 @@ The ADHD plugin and its skill copies are removed, not migrated.
   Legacy `doom_loop` and `lsp` permission actions have no v2 Core equivalent and are omitted.
 - Your custom provider ID remains `llama`, while the existing allowlist names `llama.cpp`.
   That mismatch is preserved; the custom provider remains denied by the allowlist.
-- `AGENTS.md` still names `coder-low`, `coder-high`, and `reasoner`, but those agents have no definitions here.
-  This migration does not rewrite your routing policy.
+- `AGENTS.md` no longer names `coder-low`, `coder-high`, or `reasoner`.
+  Routing now uses the available agents: `explore`, `planner`, `reviewer`, `debugger`, `general`, and specialists.
 
 The server config retains the documented schema URL.
 That public URL still describes v1 fields.
