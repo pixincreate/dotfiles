@@ -27,7 +27,7 @@ Start by understanding:
 
 Use broad searches → `@explore` when parallel exploration is useful.
 
-External documentation, dependencies, or unfamiliar APIs → `@scout` or the appropriate research specialist.
+External documentation, dependencies, or unfamiliar APIs → `@general` or the appropriate research specialist.
 
 Specialized language/framework/library/domain knowledge → consult the relevant specialist.
 
@@ -50,7 +50,7 @@ Examples:
 - Non-trivial Rust work → `@rust-expert`
 - Difficult debugging → `@debugger`
 - Broad codebase exploration → `@explore`
-- External documentation/dependency research → `@scout`
+- External documentation/dependency research → `@general`
 - Planning/design requiring independent analysis → `@planner`
 - Other specialized work → the appropriate available specialist
 

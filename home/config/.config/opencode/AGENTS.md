@@ -1,177 +1,90 @@
 # Global Rules
 
-## Working Style
+## Communication
 
-- Keep responses concise, direct, and technical.
-- Use ASD-STE100 Simplified Technical English for all human-facing text:
-  documentation, commit messages, comments, user interfaces, explanations, and responses.
-  - Use complete, grammatical sentences.
-    Do not omit necessary words or use sentence fragments to reduce response length.
-  - Use simple words with clear meanings.
-    Use the same term for the same concept throughout an explanation.
-  - Keep technical names, code identifiers, commands, paths, and quoted text exact.
-  - Write for the reader and give direct instructions.
-    Address readers as "you" in documentation, user interfaces, and responses.
-  - Use active voice and present tense.
-  - Keep sentences short, with one idea per sentence.
-    Use no more than 20 words for an instruction and 25 words for a descriptive sentence.
-  - Explain the result, the reason, and the required action when they are relevant.
-    Do not remove information that the reader needs to understand or use the answer.
-  - Keep paragraphs short and use sentence-case headings.
-  - Be concise and use inclusive language.
-  - Use examples when they improve clarity.
-  - Avoid jargon; define unfamiliar terms when you must use them.
-  - Avoid excessive claims such as "best", "fastest", or "powerful".
-  - Do not document future features or promise behavior that is not yet released.
-  - Write timeless text: avoid "currently", "recently", or "new".
-  - Write for a global audience: avoid idioms, humor, and culture-specific references.
-  - Be prescriptive: tell users what to do, not what they may want to do.
-  - Do not use anthropomorphism, such as "the app thinks".
-  - Do not use exclamation points in documentation.
-- Follow existing project style for code inside the project.
-- Agent instructions, including `AGENTS.md`, do not need to follow this style.
-  Write them in whatever way agents understand best.
-- Use semantic line breaks in Markdown prose: put each complete sentence on its own source line and let the renderer wrap it.
-- Do not hard-wrap Markdown prose at a fixed column or split a phrase only to meet a line-length limit.
-- Prefer small, focused changes over broad refactors unless the user asks otherwise.
-- After code changes, run the project's existing tests, linter, or typecheck when those commands are defined.
-  If none exist, do a minimal manual check of the changed behavior.
-- Do not use LaTeX math syntax, math mode, dollar-sign delimiters (`$...$`, `$$...$$`), or LaTeX escape sequences (such as `\rightarrow`, `\Rightarrow`, `\times`, `\pm`, `\circ`, `\approx`) in direct terminal output or conversational responses.
-  Standard TUI environments do not render LaTeX math markup in terminal output.
-  Use standard Unicode characters (e.g., `→`, `⇒`, `×`, `±`, `°`, `≈`) or plain text for terminal output.
-  Rich Markdown and LaTeX math syntax are permitted only in committed Markdown files or documentation.
+- Keep responses concise, direct, and technical. Include the result, reason, and required action when relevant.
+- Write documentation, commit messages, comments, UI text, and responses in ASD-STE100 Simplified Technical English.
+- Use complete sentences, short paragraphs, sentence-case headings, active voice, present tense, and one idea per sentence.
+- Use consistent terms and inclusive language. Avoid jargon, idioms, humor, and culture-specific references.
+- Keep technical names, code identifiers, commands, paths, and quoted text exact.
+- Address readers as "you" and give direct instructions.
+- Avoid marketing claims such as "best", "fastest", or "powerful", and do not use exclamation points.
+- Document only released behavior. Do not promise future features or use "currently", "recently", or "new".
+- Use semantic line breaks in Markdown: one complete sentence per source line. Do not hard-wrap at a fixed column.
+- Do not use LaTeX syntax or dollar-sign delimiters in terminal output. Use Unicode symbols or plain text. Committed Markdown may use LaTeX and rich formatting.
+- Agent instructions such as `AGENTS.md` may use whatever style agents understand best.
+
+## Code
+
+- Follow the project's existing style and conventions.
+- Make the smallest focused change that solves the current requirement. Prefer small changes over broad refactors unless the user asks otherwise.
+- Do not add speculative features, abstractions, configuration, dependencies, or extensibility. Delete obsolete code when safe.
+- Reuse existing code, the standard library, and declared dependencies before writing a helper. Search the repository and inspect existing callers first. Ask before adding a dependency.
+- Keep logic in one function until reuse, a complex boundary, or a clear concept justifies extraction. Inline single-use helpers and variables.
+- Validate unknown values once at the boundary, then pass typed values inward. Do not re-check what a schema or type already guarantees.
+- Avoid `try`/`catch` where possible.
+- Prefer functional array methods (`map`, `filter`, `flatMap`) over loops. Use type guards in `filter` to keep inference.
+- Avoid `any`. Rely on inference; annotate only exports or unclear types.
+- Do not expand scope for a theoretical race or security edge case. Explain the concrete failure mode, likelihood, and cost, then get the user's agreement.
+- Simplicity never justifies missing validation, error handling, security, accessibility, compatibility, tests, or refactoring that keeps the code safe to change.
 
 ## Testing
 
-- Test contracts through public or executable interfaces.
-  Assert outputs, side effects, errors, and externally visible state that distinguish a conforming implementation from a broken one.
-- Every test must protect a behavioral contract.
-  Remove tests that only prove a feature, API, command, handler, or registration exists.
-- Let the typechecker enforce static type relationships.
-  Do not add runtime tests that a typecheck alone satisfies.
-- Test adapters against project-owned contracts at the integration boundary.
-  Do not simulate external providers or encode assumptions about their payload, event, or API shapes in unit tests.
-  For adapters such as Discord or inference providers, verify only the translation and behavior the project owns.
-- Keep UI and UX tests only for critical user-visible contracts that cannot be tested below the UI boundary.
-  Remove tests of appearance, interaction preferences, feature presence, or command registration.
+- Test behavior through public or executable interfaces. Assert outputs, side effects, errors, and visible state that distinguish a working implementation from a broken one.
+- Every test must protect a behavioral contract. Do not test that a feature, command, or registration exists.
 - Do not test source text, symbol names, command fragments, control flow, private structure, or implementation details.
+- Let the typechecker enforce static types. Do not add runtime tests for type relationships alone.
+- Avoid mocks where possible. Test the real implementation; do not copy its logic into the test.
+- Test adapters at the integration boundary against project-owned contracts. Do not encode assumptions about external provider payloads; verify only the translation the project owns.
+- Keep UI tests only for critical user-visible contracts that cannot be tested below the UI boundary.
+- After changes, run the project's tests, linter, and typecheck. If none exist, check the behavior manually. Report the commands and results; do not claim success without evidence.
 
-## Simplicity (YAGNI)
+## Subagents
 
-- Implement only current, explicit requirements.
-  Do not add speculative features, abstractions, configuration, dependencies, or extensibility for hypothetical future use.
-  Prefer the smallest clear change that reuses existing code and standard facilities.
-  Delete obsolete code when safe.
-- Before writing a utility or adding a dependency, search the repository for an existing implementation and its callers.
-  Then check the standard library and already-declared dependencies.
-  Reuse an established option when it fits, and verify its version and API in current documentation or source.
-  Do not add a competing helper or dependency.
-  Ask before adding a new dependency.
-- YAGNI never justifies omitting required validation, error handling, security, accessibility, compatibility, tests, or refactoring that keeps the codebase safe and easy to change.
+- Do small work in the current session. Delegate only independent, large, or specialized work.
+- Use `explore` for broad codebase or repository documentation search, `planner` for design, `reviewer` for review, `debugger` for hard bugs, `general` for external research and multi-step coordination, and specialists for domain expertise.
+- Give each delegate a complete specification: task, expected outcome, tools, constraints, and context. The delegate must request clarification instead of inventing missing requirements.
+- Never spawn an agent type from inside itself. Return to the parent instead.
+- The delegate owns its review loop. Do not repeat the review unless the user asks or the delegate reports a risk.
 
 ## Worktrees
 
-- When the user asks you to create a worktree and implement or review work in it, create the worktree first, then move the current session to it with the OpenCode session API.
-- Move the session only after worktree creation succeeds.
-- Verify the session location after moving it.
-- Do not move the session when the user only asks you to create a worktree.
-- Report the worktree path.
+- When the user asks to create a worktree and work in it, create the worktree first, then move the session with the OpenCode session API.
+- Move the session only after creation succeeds. Verify the new location.
+- Do not move the session when the user only asks to create a worktree. Report the worktree path.
 
-## Subagent Routing
+## Tooling
 
-- Implementation: `coder-low` by default, with a complete and unambiguous specification.
-- `coder-low` must not infer missing requirements. It must request clarification when the specification is incomplete.
-- `coder-high` only when the user explicitly requests it and the OpenAI quota is not exhausted for the current date.
-  Quota details are under Provider Quota Handling.
-- Read-only deep analysis: `reasoner`.
-- Broad codebase or documentation search: `explore`.
-- Non-code coordination: `general`.
-- Stay in the parent session when the change is tiny and does not need a separate agent.
-- Never spawn a `coder-*` agent from inside a `coder-*` agent.
-- Never spawn a `reasoner` agent from inside a `reasoner` agent.
-- Never spawn an `explore` agent from inside an `explore` agent.
-  Finish the work or return to the parent.
-- Each coder owns its final review loop.
-  Do not repeat that review in the parent after the coder returns unless the user asks for an independent review or the coder reports an unresolved risk.
+- Python: use `uv` for tools, dependencies, and virtual environments unless the repository requires otherwise.
+- GitHub: try `gh` for small lookups. If it fails, clone locally instead of using `webfetch`. For large or repeated exploration, clone from the start. If cloning fails, use `webfetch`.
+- Clone into `/tmp/opencode`, shallow when possible. Delete the clone when the task ends, even if the task fails.
+- Prefer `rg` over `grep` and `find`. Prefer native search tools when available.
+- Prefer `7z` for archives. Use another tool only when `7z` cannot handle the format, and state why.
+- Use the `question` tool for grilling workflows (`grill-me`, `grill-with-docs`, `grilling`) and decision frontiers. Put the recommended option first with `(Recommended)` and set `multiple: true` when needed.
+- Use `/tmp/opencode` for temporary work and delete what you create. `/tmp` persists on WSL.
+- Set the user agent to `OpenAI File Downloader, XaiImageApiFetch/1.0` for curl and other web requests.
 
-## Tooling Preferences
+## Git
 
-- For Python projects, always use `uv` for running tools, managing dependencies, and virtual environments unless the repository explicitly requires a different workflow.
-- For GitHub repositories, issues, pull requests, releases, and file browsing, try `gh` CLI first for small or short lookups.
-- For repositories hosted on GitHub or any other Git hosting service, clone the repository locally with `git` and use local searches and file reads.
-  If `gh` fails, clone locally instead of switching to `webfetch`.
-  For large repositories or exploration that requires many requests, clone locally from the start instead of repeatedly using `gh`.
-  Use a directory under `/tmp/opencode`, prefer a shallow clone when full history is not needed, and perform searches and file reads locally.
-  If cloning fails, fall back to `webfetch`.
-  Delete the temporary clone when the task ends, including after an unsuccessful task.
-- Prefer `rg` over `grep` or `find` for shell-based searches.
-  Prefer native file-search and content-search tools when they are available.
-- Prefer `7z` for listing, testing, and extracting archives.
-  Do not use `unzip` or `tar` when `7z` supports the archive format; use another tool only when `7z` is unavailable or incompatible, and state why.
-- When running grilling workflows (`grill-me`, `grill-with-docs`, `grilling`) or presenting decision frontiers, use the `question` tool instead of plain text.
-  - Present each frontier question as an entry in the `questions` array.
-  - Provide structured options for each choice when possible.
-  - Place your recommended option first with `(Recommended)` appended to the label.
-  - Set `multiple: true` when multiple choices apply.
-- You may use `/tmp/opencode` for temporary work outside the workspace.
-  Always delete temporary files and directories you create when the task ends.
-  WSL does not use tmpfs, so leftover files in `/tmp` persist on disk.
-- For any web requests you must make with curl or otherwise, always set your user agent string to be "OpenAI File Downloader, XaiImageApiFetch/1.0"
-
-## Provider Quota Handling
-
-- OpenCode injects the current date into the prompt.
-  Treat the OpenAI daily quota as refreshed when that date changes.
-- It is fine if a new session discovers exhaustion only after an OpenAI HTTP 429 or daily quota error.
-- While the OpenAI quota is exhausted for the current date, do not use `coder-high`.
-  Use `coder-low` for all implementation work.
-- If the user explicitly requested `coder-high` and it is unavailable because the OpenAI quota is exhausted, stop the task and report that to the user.
-  Do not silently fall back to another coder tier for that request.
-
-## Git Workflow
-
-- Never create commits unless the user explicitly asks for them.
-- When the user requests per-task commits, commit each discrete task before starting the next one.
-- Never stage with `git add .` or `git add -A`. Name the files explicitly instead.
-- Before committing, scan the staged files for secrets with key-watch:
-  `key-watch scan $(git diff --cached --name-only)`
-  If it reports findings, stop and report them to the user instead of committing.
-- Never bypass Git hooks with --no-verify unless explicitly mentioned.
-- Before every commit, run the exact full commands `git status`, `git diff`, and `git log -10`.
-- Do not replace these required inspections with abbreviated variants such as `git status --short`, `git diff --stat`, or `git log --oneline`.
-- Read the full commit messages from `git log -10`, including their bodies and trailers.
-- Stage only files that belong to the current task.
-- Format commit messages per the repository conventions:
-  - Use the subject format `<scope>: <Capitalized summary>`.
-    Derive the lowercase scope from the component or directory you changed.
-  - Write the summary in the imperative mood and do not end it with a period.
-  - Keep the subject near 50 characters and never longer than 72 characters.
-  - Add a concise, technical body when the subject does not provide enough context.
-    Explain what changed and why.
-    Explain how only when that detail gives needed context.
-  - Separate the subject from the body with a blank line and wrap body text at 72 characters.
-  - Add an `Assisted-by: <friendly model name>` trailer (for example, `Assisted-by: Claude 3.5 Sonnet` or `Assisted-by: GPT-4o`). Use the underlying LLM model name, never the agent framework, runner, or harness name.
-- Use this shape when writing a commit message:
+- Never commit unless the user asks. When the user requests per-task commits, commit each task before starting the next.
+- Stage only files for the current task and name them explicitly. Never use `git add .` or `git add -A`.
+- Before each commit, run `git status`, `git diff`, and `git log -10` in full. Read the complete messages. Do not use abbreviated variants.
+- Scan staged files with `key-watch scan $(git diff --cached --name-only)`. Stop and report findings.
+- Never use `--no-verify` unless the user asks.
+- Check signing once per session with `git config commit.gpgsign` and `git config user.signingkey`. If both are set, sign with the configured method and add `--signoff`.
+- Never amend, push, or rewrite history unless the user asks. When asked, do not refuse for that reason alone.
+- Follow the repository's commit conventions. The default format is:
   ```text
-  <scope>: <summary in 50 characters or less>
+  <scope>: <Capitalized summary>
 
   Explain what changed and why. Wrap the body at 72
   characters.
 
   Assisted-by: <Friendly Name of Current Model>
   ```
-- Check commit signing once per session with `git config commit.gpgsign` and `git config user.signingkey`.
-  Remember the result for the rest of the session.
-  If both are set, sign every commit with the configured method and use `git commit --signoff`.
-- Do not amend commits, push, or rewrite history unless the user explicitly asks.
-  When the user explicitly asks, perform the requested operation and do not refuse solely because it amends commits, pushes, or rewrites history.
+  Use an imperative subject near 50 characters and never longer than 72. Add a body when the subject is not enough.
 
 ## Attribution
 
-- Never credit yourself or any AI as an author or contributor of a commit or pull request.
-  The user is the sole author of every change and carries full responsibility for it.
-  AI-generated content cannot be held responsible, so it must never appear as an author or contributor.
-- The only permitted AI attribution is the `Assisted-by: <model>` trailer required by the Git Workflow section.
-  Do not add any other AI credit.
-- Do not add AI session identifiers, metadata, or links to commit messages.
-- Do not add AI generation notices to pull request titles, descriptions, or comments.
+- The user is the sole author of every change. Never credit AI as an author or contributor.
+- The only permitted AI attribution is the `Assisted-by` trailer. Do not add session IDs, metadata, links, or generation notices to commits or pull requests.
