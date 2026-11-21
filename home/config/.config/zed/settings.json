@@ -290,7 +290,7 @@
     // Existing terminals will not pick up this change until they are recreated.
     "max_scroll_history_lines": 1000000,
   },
-  "cli_default_open_behavior": "existing_window",
+  "cli_default_open_behavior": "new_window",
 
   // The code actions to perform with the primary language server when formatting the buffer.
   "code_actions_on_format": {

@@ -1,9 +1,10 @@
 # rofimoji copies the selected emoji to the clipboard. Paste with Ctrl+V.
 #
-# Direct insertion is not available on KWin. The compositor implements
-# neither zwp_virtual_keyboard_manager_v1 nor zwp_input_method_manager_v2,
-# so wtype exits with "Compositor does not support the virtual keyboard
-# protocol" and rofimoji reports no error.
+# Use "copy", not "clipboard". The "clipboard" action also sends a paste
+# through the typer. KWin implements neither
+# zwp_virtual_keyboard_manager_v1 nor zwp_input_method_manager_v2, so the
+# paste fails. rofimoji then restores the previous clipboard content, which
+# discards the emoji.
 selector = fuzzel
-action = clipboard
+action = copy
 clipboarder = wl-copy
