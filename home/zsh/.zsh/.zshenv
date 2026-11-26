@@ -23,3 +23,6 @@ export ADBLOCK=1
 if [[ -f "$HOME/.config/age/key.txt" ]] && [[ -f "$HOME/.zsh/.env.age" ]]; then
   eval "$(age --decrypt --identity "$HOME/.config/age/key.txt" "$HOME/.zsh/.env.age" 2>/dev/null)"
 fi
+
+# Prevent OpenCode OTLP export. This also applies to other shell tools.
+unset OTEL_EXPORTER_OTLP_ENDPOINT
