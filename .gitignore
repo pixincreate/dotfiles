@@ -8,6 +8,9 @@
 # Environment variables
 .envrc
 
+# Machine-local OpenCode configuration
+/home/config/.config/opencode/local.jsonc
+
 # Rust
 /target
 
